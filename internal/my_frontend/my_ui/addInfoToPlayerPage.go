@@ -67,6 +67,26 @@ func AddInfoToSelectedPlayerPage(p *mt.Player, db *mt.Database, w fyne.Window, a
 		playerRankingStr = strconv.Itoa(p.Ranking)
 	}
 
+	// Do not display blank for material
+	var material1 string
+	if p.Material[0] == "" {
+		material1 = T("not_indicated")
+	} else {
+		material1 = p.Material[0]
+	}
+	var material2 string
+	if p.Material[1] == "" {
+		material2 = T("not_indicated")
+	} else {
+		material2 = p.Material[1]
+	}
+	var material3 string
+	if p.Material[2] == "" {
+		material3 = T("not_indicated")
+	} else {
+		material3 = p.Material[2]
+	}
+
 	// Here are optional informations that can be added to the player
 	ageEntry := widget.NewEntry()
 	entryAgeHolder := playerAgeStr
@@ -77,15 +97,15 @@ func AddInfoToSelectedPlayerPage(p *mt.Player, db *mt.Database, w fyne.Window, a
 	rankingEntry.SetPlaceHolder(entryRankingHolder)
 
 	forehandEntry := widget.NewEntry()
-	entryForehandHolder := p.Material[0]
+	entryForehandHolder := material1
 	forehandEntry.SetPlaceHolder(entryForehandHolder)
 
 	backhandEntry := widget.NewEntry()
-	entryBackhandHolder := p.Material[1]
+	entryBackhandHolder := material2
 	backhandEntry.SetPlaceHolder(entryBackhandHolder)
 
 	bladeEntry := widget.NewEntry()
-	entryBladeHolder := p.Material[2]
+	entryBladeHolder := material3
 	bladeEntry.SetPlaceHolder(entryBladeHolder)
 
 	var isAgeModified bool
