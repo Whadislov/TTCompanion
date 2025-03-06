@@ -2,6 +2,7 @@ package myapp
 
 import (
 	"log"
+	"net/url"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -168,6 +169,13 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 			text = enDescription
 		}
 
+		githubURL, _ := url.Parse("https://github.com/Whadislov/TTCompanion")
+		renderURL, _ := url.Parse("https://ttcompanion.onrender.com")
+		cloudRunURL, _ := url.Parse("https://ttcompanion-prod-912172190800.europe-west9.run.app")
+		githubHyperlink := widget.NewHyperlink("GitHub", githubURL)
+		renderHyperlink := widget.NewHyperlink("Render server", renderURL)
+		cloudRunHyperlink := widget.NewHyperlink("Cloud Run server", cloudRunURL)
+
 		returnToMainMenuButton := widget.NewButton(T("return_to_main_page"), func() {
 			w.SetContent(MainPage(db, w, a))
 		})
@@ -175,6 +183,9 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 		content := container.NewVBox(
 			pageTitle,
 			widget.NewLabel(text),
+			githubHyperlink,
+			renderHyperlink,
+			cloudRunHyperlink,
 			returnToMainMenuButton,
 		)
 		w.SetContent(content)
@@ -184,5 +195,4 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 	menu := fyne.NewMainMenu(newMenu1, newMenu2, newMenu3, newMenu4)
 
 	return menu
-
 }
