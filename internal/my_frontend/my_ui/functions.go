@@ -212,16 +212,15 @@ func loadingWindow(w fyne.Window, stopChan chan string) {
 	ctodbStringSuffixes := []string{"", ".", "..", "..."}
 
 	ctodbStringInit := "Connecting to the database"
-	ctodbString := ctodbStringInit
-	dialogWindow := dialog.NewInformation("Loading", ctodbString, w)
+	dialogWindow := dialog.NewInformation("Loading", ctodbStringInit, w)
 	dialogWindow.Show()
 
 	// timeout after 30 seconds
 	for i := range 30 {
-		time.Sleep(1 * time.Second)
-		ctodbString = ctodbStringInit + ctodbStringSuffixes[i%4]
+		time.Sleep(200 * time.Millisecond)
 		dialogWindow.Hide()
-		dialogWindow := dialog.NewInformation("Loading", ctodbString, w)
+		dialogWindow := dialog.NewInformation("Loading", ctodbStringInit+ctodbStringSuffixes[i%4], w)
+		dialogWindow.Show()
 		result := <-stopChan
 		if result == "ok" {
 			close(stopChan)
