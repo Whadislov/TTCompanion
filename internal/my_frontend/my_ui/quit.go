@@ -24,7 +24,12 @@ func Quit(db *mt.Database, w fyne.Window, a fyne.App, HasChanged bool) {
 						dialog.ShowError(err, w)
 					}
 				} else if appStartOption == "browser" {
+					stopChan := make(chan string, 1)
+					go func() {
+						loadingWindow(T("saving"), w, stopChan)
+					}()
 					err := mr.SaveDB(credToken, db)
+					stopChan <- "ok"
 					if err != nil {
 						dialog.ShowError(err, w)
 					}

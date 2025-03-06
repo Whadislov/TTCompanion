@@ -1,4 +1,7 @@
 {
+    "about_TTC": {
+        "other": "About TT Companion"
+    },
     "add": {
         "other": "Add"
     },
@@ -19,6 +22,9 @@
     },
     "add_player_to_a_team": {
         "other": "Add player(s) to a team"
+    },
+    "add_relationships": {
+        "other": "Add relationships between elements"
     },
     "add_select_a_club": {
         "other": "Add: select a club"
@@ -45,7 +51,7 @@
         "other": "Authentification"
     },
     "backhand": {
-        "other": "Backhand"
+        "other": "Backhand Rubber"
     },
     "blade": {
         "other": "Blade"
@@ -92,8 +98,14 @@
     "connect": {
         "other": "Connect"
     },
+    "connecting": {
+        "other": "Connecting"
+    },
     "create": {
         "other": "Create"
+    },
+    "create_new_element": {
+        "other": "Create a new element"
     },
     "create_a_new_club": {
         "other": "Create a new club"
@@ -142,6 +154,9 @@
     },
     "delete": {
         "other": "Delete"
+    },
+    "delete_element": {
+        "other": "Delete element"
     },
     "delete_player": {
         "other": "Delete player %v %v?"
@@ -243,7 +258,7 @@
         "other": "firstname must not be empty"
     },
     "forehand": {
-        "other": "Forehand"
+        "other": "Forehand rubber"
     },
     "forgot_password": {
         "other": "Forgot your password?"
@@ -259,6 +274,9 @@
     },
     "has_not_been_modified": {
         "other": "has not been modified"
+    },
+    "help": {
+        "other": "Help"
     },
     "information": {
         "other": "Information"
@@ -280,6 +298,9 @@
     },
     "lastname.must_not_be_empty": {
         "other": "lastname must not be empty"
+    },
+    "loading": {
+        "other": "Loading"
     },
     "log_in": {
         "other": "Log in"
@@ -319,6 +340,12 @@
     },
     "no_longer_plays_in_team": {
         "other": "no longer plays in team(s)"
+    },
+    "not_indicated": {
+        "other": "Not indicated"
+    },
+    "operation_timed_out": {
+        "other": "Operation timed out"
     },
     "options": {
         "other": "Options"
@@ -366,25 +393,28 @@
         "other": "Quit"
     },
     "ranking": {
-        "other": "Ranking"
+        "other": "Ranking (points)"
     },
     "remove": {
         "other": "Remove"
     },
     "remove_club_from_a_player": {
-        "other": "Remove club(s) from a player"
+        "other": "Remove player from a club"
     },
     "remove_confirm_selection": {
-        "other": "Remove: confirm selection"
+        "other": "Remove relationships: confirm selection"
     },
     "remove_player_from_a_team": {
         "other": "Remove player(s) from a team"
     },
+    "remove_relationships": {
+        "other": "Remove relationships between elements"
+    },
     "remove_select_a_player": {
-        "other": "Remove: select a player"
+        "other": "Remove relationships: select a player"
     },
     "remove_select_a_team": {
-        "other": "Remove: select a team"
+        "other": "Remove relationships: select a team"
     },
     "remove_team_from_a_player": {
         "other": "Remove team(s) from a player"
@@ -425,11 +455,17 @@
     "return_to_the_create_menu": {
         "other": "Return to the create menu"
     },
+    "save": {
+        "other": "Save"
+    },
     "save_before_quit": {
         "other": "You have unsaved changes. Do you want to save them before quitting?"
     },
     "save_changes": {
         "other": "Save changes"
+    },
+    "saving": {
+        "other": "Saving"
     },
     "select_a_club": {
         "other": "Select a club"
@@ -552,7 +588,7 @@
         "other": "Welcome to TT Companion"
     },
     "wrong_password": {
-        "other": "wrong password"
+        "other": "Wrong password"
     },
     "yes": {
         "other": "Yes"

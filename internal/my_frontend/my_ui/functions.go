@@ -184,10 +184,10 @@ func sexText(s string, size float32) *canvas.Text {
 				return theme.VariantLight
 			}
 		}())
-	title := canvas.NewText(s, themeColor)
-	title.Alignment = fyne.TextAlignCenter
-	title.TextSize = size
-	return title
+	text := canvas.NewText(s, themeColor)
+	text.Alignment = fyne.TextAlignCenter
+	text.TextSize = size
+	return text
 }
 
 // loadTheme sets the flags for the light Theme and the dark Theme
@@ -204,4 +204,24 @@ func loadTheme(a fyne.App) {
 func loadThemeWeb(a fyne.App) {
 	darkTheme.IsActivated = true
 	a.Settings().SetTheme(&darkTheme)
+}
+
+// loadingWindow opens a window that indicates that an operation is working
+func loadingWindow(msg string, w fyne.Window, stopChan chan string) {
+
+	dialogWindow := dialog.NewCustomWithoutButtons(T("loading"), widget.NewLabel(msg), w)
+	dialogWindow.Show()
+
+	// timeout after 30 seconds
+	for range 30 {
+		result := <-stopChan
+		if result == "ok" {
+			close(stopChan)
+			dialogWindow.Hide()
+			return
+		}
+	}
+	close(stopChan)
+	dialogWindow.Hide()
+	dialog.ShowError(fmt.Errorf(T("operation_timed_out")), w)
 }

@@ -49,8 +49,12 @@ func AuthentificationPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 	})
 
 	demoButton := widget.NewButton(T("demo"), func() {
-
+		stopChan := make(chan string, 1)
+		go func() {
+			loadingWindow(T("connecting"), w, stopChan)
+		}()
 		db, token, err := mr.Login("demo", "demo")
+		stopChan <- "ok"
 		if err != nil {
 			dialog.ShowError(errors.New(T("internal_error")), w)
 		}
@@ -122,7 +126,12 @@ func signUpPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 			log.Println("passwords do not match:")
 			w.SetContent(signUpPageWeb(w, a))
 		} else {
+			stopChan := make(chan string, 1)
+			go func() {
+				loadingWindow(T("connecting"), w, stopChan)
+			}()
 			db, token, err := mr.SignUp(usernameEntry.Text, passwordEntry.Text, emailEntry.Text)
+			stopChan <- "ok"
 			credToken = token
 			// Last check if username or email already exist
 			if err != nil {
@@ -178,7 +187,12 @@ func loginPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 	passwordEntry := widget.NewPasswordEntry()
 
 	validationButton := widget.NewButton(T("login"), func() {
+		stopChan := make(chan string, 1)
+		go func() {
+			loadingWindow(T("connecting"), w, stopChan)
+		}()
 		db, token, err := mr.Login(usernameEntry.Text, passwordEntry.Text)
+		stopChan <- "ok"
 		credToken = token
 		if err != nil {
 			err_username_password_missmatch := errors.New("username or password is invalid")

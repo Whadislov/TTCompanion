@@ -1,4 +1,7 @@
 {
+    "about_TTC": {
+        "other": "À propos de TT Companion"
+    },
     "add": {
         "other": "Ajouter"
     },
@@ -19,6 +22,9 @@
     },
     "add_player_to_a_team": {
         "other": "Ajouter un ou des joueurs à une équipe"
+    },
+    "add_relationships": {
+        "other": "Ajouter des relations entre les éléments"
     },
     "add_select_a_club": {
         "other": "Ajouter: sélectionnez un club"
@@ -45,7 +51,7 @@
         "other": "Authentification"
     },
     "backhand": {
-        "other": "Revers"
+        "other": "Revêtement revers"
     },
     "blade": {
         "other": "Bois"
@@ -92,11 +98,17 @@
     "connect": {
         "other": "Connecter"
     },
+    "connecting": {
+        "other": "Connexion"
+    },
     "create": {
         "other": "Créer"
     },
     "create_a_new_club": {
         "other": "Créer un nouveau club"
+    },
+    "create_new_element": {
+        "other": "Créer un nouvel élément"
     },
     "create_a_new_player": {
         "other": "Créer un nouveau joueur"
@@ -142,6 +154,9 @@
     },
     "delete": {
         "other": "Supprimer"
+    },
+    "delete_element": {
+        "other": "Supprimer un élément"
     },
     "delete_player": {
     "other": "Supprimer joueur/joueuse %v %v ?"
@@ -243,7 +258,7 @@
         "other": "Le prénom ne doit pas être vide"
     },
     "forehand": {
-        "other": "Coup droit"
+        "other": "Revêtement coup droit"
     },
     "forgot_password": {
         "other": "Mot de passe oublié?"
@@ -259,6 +274,9 @@
     },
     "has_not_been_modified": {
         "other": "n'a pas été modifié"
+    },
+    "help": {
+        "other": "Aide"
     },
     "information": {
         "other": "Information"
@@ -280,6 +298,9 @@
     },
     "lastname.must_not_be_empty": {
         "other": "Le nom de famille ne doit pas être vide"
+    },
+    "loading": {
+        "other": "Chargement"
     },
     "log_in": {
         "other": "Se connecter"
@@ -319,6 +340,12 @@
     },
     "no_longer_plays_in_team": {
         "other": "Ne joue plus en équipe (s)"
+    },
+    "not_indicated": {
+        "other": "Non renseigné"
+    },
+    "operation_timed_out": {
+        "other": "L'opération a expiré"
     },
     "options": {
         "other": "Options"
@@ -366,28 +393,31 @@
         "other": "Quitter"
     },
     "ranking": {
-        "other": "Classement"
+        "other": "Classement (points)"
     },
     "remove": {
         "other": "Retirer"
     },
     "remove_club_from_a_player": {
-        "other": "Supprimer les clubs d'un joueur"
+        "other": "Supprimer un joueur du club"
     },
     "remove_confirm_selection": {
-        "other": "Supprimer: confirmer la sélection"
+        "other": "Supprimer des relations: confirmer la sélection"
     },
     "remove_player_from_a_team": {
-        "other": "Retirer les joueurs d'une équipe"
+        "other": "Supprimer un joueur d'une équipe"
+    },
+    "remove_relationships": {
+        "other": "Supprimer des relations entres les éléments"
     },
     "remove_select_a_player": {
-        "other": "Supprimer: sélectionnez un joueur"
+        "other": "Supprimer des relations: sélectionnez un joueur"
     },
     "remove_select_a_team": {
-        "other": "Supprimer: sélectionnez une équipe"
+        "other": "Supprimer des relations: sélectionnez une équipe"
     },
     "remove_team_from_a_player": {
-        "other": "Supprimer l'équipe (s) d'un joueur"
+        "other": "Supprimer une équipe d'un joueur"
     },
     "reset_your_password": {
         "other": "Réinitialisez votre mot de passe"
@@ -425,11 +455,17 @@
     "return_to_the_create_menu": {
         "other": "Retour au menu Créer"
     },
+    "save": {
+        "other": "Sauvegarder"
+    },
     "save_before_quit": {
         "other": "Vous avez des changements non sauvés. Voulez-vous les sauver avant d'arrêter?"
     },
     "save_changes": {
         "other": "Enregistrer les modifications"
+    },
+    "saving": {
+        "other": "Sauvegarde"
     },
     "select_a_club": {
         "other": "Sélectionnez un club"
@@ -510,7 +546,7 @@
         "other": "Il n'y a plus d'équipe à ajouter"
     },
     "there_is_nothing_new_to_save": {
-        "other": "Il n'y a rien de nouveau à économiser"
+        "other": "Il n'y a rien de nouveau à sauvegarder"
     },
     "title.forgot_password_page": {
         "other": "Mot de passe oublié?"
@@ -552,7 +588,7 @@
         "other": "Bienvenue sur TT Companion"
     },
     "wrong_password": {
-        "other": "mauvais mot de passe"
+        "other": "Mauvais mot de passe"
     },
     "yes": {
         "other": "Oui"

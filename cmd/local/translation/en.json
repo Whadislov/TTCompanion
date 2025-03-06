@@ -1,4 +1,7 @@
 {
+    "about_TTC": {
+        "other": "About TT Companion"
+    },
     "add": {
         "other": "Add"
     },
@@ -19,6 +22,9 @@
     },
     "add_player_to_a_team": {
         "other": "Add player(s) to a team"
+    },
+    "add_relationships": {
+        "other": "Add relationships between elements"
     },
     "add_select_a_club": {
         "other": "Add: select a club"
@@ -45,7 +51,7 @@
         "other": "Authentification"
     },
     "backhand": {
-        "other": "Backhand"
+        "other": "Backhand Rubber"
     },
     "blade": {
         "other": "Blade"
@@ -92,8 +98,14 @@
     "connect": {
         "other": "Connect"
     },
+    "connecting": {
+        "other": "Connecting"
+    },
     "create": {
         "other": "Create"
+    },
+    "create_new_element": {
+        "other": "Create a new element"
     },
     "create_a_new_club": {
         "other": "Create a new club"
@@ -143,6 +155,9 @@
     "delete": {
         "other": "Delete"
     },
+    "delete_element": {
+        "other": "Delete element"
+    },
     "delete_player": {
         "other": "Delete player %v %v?"
     },
@@ -163,6 +178,9 @@
     },
     "demo": {
         "other": "Demo"
+    },
+    "description_of_the_app": {
+        "other": "Description of the Application\nTT Companion is a table tennis club management application. The user can create clubs, teams, players, and establish relationships between them. All modifications are performed on the client side and must be saved before exiting, either via the main menu or on the main page. Users can also customize their language and theme preferences in the options. Don’t forget to save your work before quitting the app!\nGoal of the Application\nThe purpose of this application is to enhance my software development skills:\n- Backend language: Golang\n- Frontend language: Golang (Framework Fyne)\n- Version management: Git\n- Distribution: Via a Docker image containing a compressed version of the compiled software in WebAssembly (WASM). Compression is handled with Brotli.\n- Storage: Github and Dockerhub. https://github.com/Whadislov/TTCompanion\n- Database: PostgreSQL, provided by Neon.tech. Stored passwords are encrypted using the bcrypt function.\n- Automation: Primarily GitHub Actions for deployments, with some Jenkins for tests and compilations.\n- Deployment:\na) The staging environment runs on Render.com. https://ttcompanion.onrender.com\nb) The production environment runs on Cloud Run. https://ttcompanion-prod-912172190800.europe-west9.run.app"
     },
     "edit_email": {
         "other": "Edit e-mail"
@@ -243,7 +261,7 @@
         "other": "firstname must not be empty"
     },
     "forehand": {
-        "other": "Forehand"
+        "other": "Forehand rubber"
     },
     "forgot_password": {
         "other": "Forgot your password?"
@@ -259,6 +277,9 @@
     },
     "has_not_been_modified": {
         "other": "has not been modified"
+    },
+    "help": {
+        "other": "Help"
     },
     "information": {
         "other": "Information"
@@ -280,6 +301,9 @@
     },
     "lastname.must_not_be_empty": {
         "other": "lastname must not be empty"
+    },
+    "loading": {
+        "other": "Loading"
     },
     "log_in": {
         "other": "Log in"
@@ -319,6 +343,12 @@
     },
     "no_longer_plays_in_team": {
         "other": "no longer plays in team(s)"
+    },
+    "not_indicated": {
+        "other": "Not indicated"
+    },
+    "operation_timed_out": {
+        "other": "Operation timed out"
     },
     "options": {
         "other": "Options"
@@ -366,25 +396,28 @@
         "other": "Quit"
     },
     "ranking": {
-        "other": "Ranking"
+        "other": "Ranking (points)"
     },
     "remove": {
         "other": "Remove"
     },
     "remove_club_from_a_player": {
-        "other": "Remove club(s) from a player"
+        "other": "Remove player from a club"
     },
     "remove_confirm_selection": {
-        "other": "Remove: confirm selection"
+        "other": "Remove relationships: confirm selection"
     },
     "remove_player_from_a_team": {
         "other": "Remove player(s) from a team"
     },
+    "remove_relationships": {
+        "other": "Remove relationships between elements"
+    },
     "remove_select_a_player": {
-        "other": "Remove: select a player"
+        "other": "Remove relationships: select a player"
     },
     "remove_select_a_team": {
-        "other": "Remove: select a team"
+        "other": "Remove relationships: select a team"
     },
     "remove_team_from_a_player": {
         "other": "Remove team(s) from a player"
@@ -425,11 +458,17 @@
     "return_to_the_create_menu": {
         "other": "Return to the create menu"
     },
+    "save": {
+        "other": "Save"
+    },
     "save_before_quit": {
         "other": "You have unsaved changes. Do you want to save them before quitting?"
     },
     "save_changes": {
         "other": "Save changes"
+    },
+    "saving": {
+        "other": "Saving"
     },
     "select_a_club": {
         "other": "Select a club"
@@ -552,7 +591,7 @@
         "other": "Welcome to TT Companion"
     },
     "wrong_password": {
-        "other": "wrong password"
+        "other": "Wrong password"
     },
     "yes": {
         "other": "Yes"

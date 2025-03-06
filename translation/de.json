@@ -1,36 +1,42 @@
 {
+    "about_TTC": {
+        "other": "Über TT Companion"
+    },
     "add": {
         "other": "Hinzufügen"
     },
     "add_another_club": {
-        "other": "Fügen Sie einen weiteren Verein hinzu"
+        "other": "Einen weiteren Verein hinzufügen"
     },
     "add_another_player": {
-        "other": "Fügen Sie einen anderen Spieler hinzu"
+        "other": "Einen anderen Spieler hinzufügen"
     },
     "add_another_team": {
-        "other": "Fügen Sie ein anderes Team hinzu"
+        "other": "Ein anderes Team hinzufügen"
     },
     "add_club_to_a_player": {
-        "other": "Fügen Sie einem Spieler Verein(e) hinzu"
+        "other": "Einem Spieler Verein(e) hinzufügen"
     },
     "add_confirm": {
         "other": "Hinzufügen: Bestätigen"
     },
     "add_player_to_a_team": {
-        "other": "Fügen Sie einem Team Spieler hinzu"
+        "other": "Einem Team Spieler hinzufügen"
+    },
+    "add_relationships": {
+        "other": "Beziehungen zwischen Elementen hinzufügen"
     },
     "add_select_a_club": {
-        "other": "Hinzufügen: Wählen Sie einen Verein aus"
+        "other": "Hinzufügen: Einen Verein auswählen"
     },
     "add_select_a_player": {
-        "other": "Hinzufügen: Wählen Sie einen Spieler aus"
+        "other": "Hinzufügen: Einen Spieler auswählen"
     },
     "add_select_a_team": {
-        "other": "Hinzufügen: Wählen Sie ein Team aus"
+        "other": "Hinzufügen: Ein Team auswählen"
     },
     "add_team_to_a_player": {
-        "other": "Fügen Sie einem Spieler Team(s) hinzu"
+        "other": "Einem Spieler Team(s) hinzufügen"
     },
     "age": {
         "other": "Alter"
@@ -45,7 +51,7 @@
         "other": "Authentifizierung"
     },
     "backhand": {
-        "other": "Rückhand"
+        "other": "Rückhand Belag"
     },
     "blade": {
         "other": "Holz"
@@ -92,14 +98,20 @@
     "connect": {
         "other": "Verbinden"
     },
+    "connecting": {
+        "other": "Wird verbindet"
+    },
     "create": {
         "other": "Erstellen"
     },
     "create_a_new_club": {
-        "other": "Erstellen Sie einen neuen Verein"
+        "other": "Einen neuen Verein erstellen"
+    },
+    "create_new_element": {
+        "other": "Ein neues Element erstellen"
     },
     "create_a_new_player": {
-        "other": "Erstellen Sie einen neuen Spieler"
+        "other": "Einen neuen Spieler erstellen"
     },
     "create_a_new_player_add_info": {
         "other": "Neuen Spieler erstellen: Playerinformationen hinzufügen"
@@ -108,7 +120,7 @@
         "other": "Neuen Spieler erstellen: Wählen Sie einen Verein aus"
     },
     "create_a_new_team": {
-        "other": "Erstellen Sie ein neues Team"
+        "other": "Ein neues Team erstellen"
     },
     "create_a_new_team_select_a_club": {
         "other": "Neues Team erstellen: Wählen Sie einen Verein aus"
@@ -142,6 +154,9 @@
     },
     "delete": {
         "other": "Löschen"
+    },
+    "delete_element": {
+        "other": "Element löschen"
     },
    "delete_player": {
     "other": "Spieler(in) %v %v löschen?"
@@ -243,7 +258,7 @@
         "other": "Der Vorname darf nicht leer sein"
     },
     "forehand": {
-        "other": "Vorhand"
+        "other": "Vorhand Belag"
     },
     "forgot_password": {
         "other": "Passwort vergessen?"
@@ -259,6 +274,9 @@
     },
     "has_not_been_modified": {
         "other": "wurde nicht modifiziert"
+    },
+    "help": {
+        "other": "Hilfe"
     },
     "information": {
         "other": "Information"
@@ -280,6 +298,9 @@
     },
     "lastname.must_not_be_empty": {
         "other": "Der Nachname darf nicht leer sein"
+    },
+    "loading": {
+        "other": "Wird geladen"
     },
     "log_in": {
         "other": "Einloggen"
@@ -315,10 +336,16 @@
         "other": "Neue Passwörter stimmen nicht überein"
     },
     "no": {
-        "other": "NEIN"
+        "other": "Nein"
     },
     "no_longer_plays_in_team": {
         "other": "spielt nicht mehr in Teams (en)"
+    },
+    "not_indicated": {
+        "other": "Nicht angegeben"
+    },
+    "operation_timed_out": {
+        "other": "Zeitüberschreitung der Operation"
     },
     "options": {
         "other": "Optionen"
@@ -366,28 +393,31 @@
         "other": "Aufhören"
     },
     "ranking": {
-        "other": "Rang"
+        "other": "Rangliste (Punkte)"
     },
     "remove": {
         "other": "Entfernen"
     },
     "remove_club_from_a_player": {
-        "other": "Entfernen Sie Vereine (en) von einem Spieler"
+        "other": "Spieler aus einem Verein entfernen"
     },
     "remove_confirm_selection": {
-        "other": "Entfernen: Auswahl bestätigen"
+        "other": "Beziehungen zwischen Elementen entfernen: Auswahl bestätigen"
     },
     "remove_player_from_a_team": {
-        "other": "Entfernen Sie Spieler (en) aus einem Team"
+        "other": "Spieler aus einem Team entfernen"
+    },
+    "remove_relationships": {
+        "other": "Beziehungen zwischen Elementen entfernen"
     },
     "remove_select_a_player": {
-        "other": "Entfernen: Wählen Sie einen Spieler aus"
+        "other": "Beziehungen zwischen Elementen entfernen: Einen Spieler auswählen"
     },
     "remove_select_a_team": {
-        "other": "Entfernen: Wählen Sie ein Team aus"
+        "other": "Beziehungen zwischen Elementen entfernen: Ein Team auswählen"
     },
     "remove_team_from_a_player": {
-        "other": "Entfernen Sie Team (en) von einem Spieler"
+        "other": "Team(s) von einem Spieler entfernen"
     },
     "reset_your_password": {
         "other": "Setzen Sie Ihr Passwort zurück"
@@ -425,20 +455,26 @@
     "return_to_the_create_menu": {
         "other": "Zurück zum Menü erstellen"
     },
+    "save": {
+        "other": "Speichern"
+    },
     "save_before_quit": {
         "other": "Sie haben nicht gerettete Änderungen. Möchten Sie sie speichern, bevor Sie aufhören?"
     },
     "save_changes": {
         "other": "Änderungen speichern"
     },
+    "saving": {
+        "other": "Wird gespeichert"
+    },
     "select_a_club": {
-        "other": "Wählen Sie einen Verein aus"
+        "other": "Einen Verein auswählen"
     },
     "select_a_player": {
-        "other": "Wählen Sie einen Spieler aus"
+        "other": "Einen Spieler auswählen"
     },
     "select_a_team": {
-        "other": "Wählen Sie ein Team aus"
+        "other": "Ein Team auswählen"
     },
     "show_clubs": {
         "other": "Vereine zeigen"
@@ -510,13 +546,13 @@
         "other": "Es gibt kein Team mehr zum Hinzufügen"
     },
     "there_is_nothing_new_to_save": {
-        "other": "Es gibt nichts Neues zu retten"
+        "other": "Es gibt nichts Neues zu speichern"
     },
     "title.forgot_password_page": {
         "other": "Passwort vergessen?"
     },
     "try_again": {
-        "other": "Versuchen Sie es erneut"
+        "other": "Erneut versuchen"
     },
     "unknown": {
         "other": "Unbekannt"

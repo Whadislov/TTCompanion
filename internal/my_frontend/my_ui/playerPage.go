@@ -30,8 +30,42 @@ func PlayerInfos(player *mt.Player) *fyne.Container {
 	// Sort clubs alphabetically
 	slices.Sort(clubs)
 
+	// Do not display -1
+	var playerAgeStr string
+	if player.Age == -1 {
+		playerAgeStr = T("not_indicated")
+	} else {
+		playerAgeStr = strconv.Itoa(player.Age)
+	}
+	var playerRankingStr string
+	if player.Ranking == -1 {
+		playerRankingStr = T("not_indicated")
+	} else {
+		playerRankingStr = strconv.Itoa(player.Ranking)
+	}
+
+	// Do not display blank for material
+	var material1 string
+	if player.Material[0] == "" {
+		material1 = T("not_indicated")
+	} else {
+		material1 = player.Material[0]
+	}
+	var material2 string
+	if player.Material[1] == "" {
+		material2 = T("not_indicated")
+	} else {
+		material2 = player.Material[1]
+	}
+	var material3 string
+	if player.Material[2] == "" {
+		material3 = T("not_indicated")
+	} else {
+		material3 = player.Material[2]
+	}
+
 	leftText := T("firstname") + ":\n" + T("lastname") + ":\n" + T("age") + ":\n" + T("forehand") + ":\n" + T("backhand") + ":\n" + T("blade") + ":\n" + T("ranking") + ":\n" + T("teams") + ":\n" + T("clubs") + ":"
-	rightText := player.Firstname + "\n" + player.Lastname + "\n" + strconv.Itoa(player.Age) + "\n" + player.Material[0] + "\n" + player.Material[1] + "\n" + player.Material[2] + "\n" + strconv.Itoa(player.Ranking) + "\n" + strHelper(teams) + "\n" + strHelper(clubs)
+	rightText := player.Firstname + "\n" + player.Lastname + "\n" + playerAgeStr + "\n" + material1 + "\n" + material2 + "\n" + material3 + "\n" + playerRankingStr + "\n" + strHelper(teams) + "\n" + strHelper(clubs)
 
 	playerInfosContent := container.NewGridWithColumns(2, widget.NewLabel(leftText), widget.NewLabel(rightText))
 	return playerInfosContent

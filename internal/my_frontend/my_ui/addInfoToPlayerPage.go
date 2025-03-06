@@ -53,25 +53,59 @@ func AddInfoToSelectedPlayerPage(p *mt.Player, db *mt.Database, w fyne.Window, a
 
 	playerLabel := widget.NewLabel(fmt.Sprintf(T("you_have_selected")+" %v %v.", p.Firstname, p.Lastname))
 
+	// Do not display -1
+	var playerAgeStr string
+	if p.Age == -1 {
+		playerAgeStr = T("not_indicated")
+	} else {
+		playerAgeStr = strconv.Itoa(p.Age)
+	}
+	var playerRankingStr string
+	if p.Ranking == -1 {
+		playerRankingStr = T("not_indicated")
+	} else {
+		playerRankingStr = strconv.Itoa(p.Ranking)
+	}
+
+	// Do not display blank for material
+	var material1 string
+	if p.Material[0] == "" {
+		material1 = T("not_indicated")
+	} else {
+		material1 = p.Material[0]
+	}
+	var material2 string
+	if p.Material[1] == "" {
+		material2 = T("not_indicated")
+	} else {
+		material2 = p.Material[1]
+	}
+	var material3 string
+	if p.Material[2] == "" {
+		material3 = T("not_indicated")
+	} else {
+		material3 = p.Material[2]
+	}
+
 	// Here are optional informations that can be added to the player
 	ageEntry := widget.NewEntry()
-	entryAgeHolder := strconv.Itoa(p.Age)
+	entryAgeHolder := playerAgeStr
 	ageEntry.SetPlaceHolder(entryAgeHolder)
 
 	rankingEntry := widget.NewEntry()
-	entryRankingHolder := strconv.Itoa(p.Ranking)
+	entryRankingHolder := playerRankingStr
 	rankingEntry.SetPlaceHolder(entryRankingHolder)
 
 	forehandEntry := widget.NewEntry()
-	entryForehandHolder := p.Material[0]
+	entryForehandHolder := material1
 	forehandEntry.SetPlaceHolder(entryForehandHolder)
 
 	backhandEntry := widget.NewEntry()
-	entryBackhandHolder := p.Material[1]
+	entryBackhandHolder := material2
 	backhandEntry.SetPlaceHolder(entryBackhandHolder)
 
 	bladeEntry := widget.NewEntry()
-	entryBladeHolder := p.Material[2]
+	entryBladeHolder := material3
 	bladeEntry.SetPlaceHolder(entryBladeHolder)
 
 	var isAgeModified bool

@@ -17,7 +17,7 @@ import (
 // CreatePage sets up the page for creating players, teams, and clubs.
 func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 
-	pageTitle := setTitle(T("confirm"), 32)
+	pageTitle := setTitle(T("create_new_element"), 32)
 
 	ReturnToFonctionalityPageButton := widget.NewButton(T("return_to_functionalities"), func() {
 		fonctionalityPage := FunctionalityPage(db, w, a)
@@ -141,7 +141,7 @@ func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 							}
 						} else {
 							// Set default player material
-							forehandEntry.SetText(T("unknown"))
+							forehandEntry.SetText("")
 						}
 						if backhandEntry.Text != "" {
 							backhandEntry.Text = standardizeSpaces(backhandEntry.Text)
@@ -153,7 +153,7 @@ func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 							}
 						} else {
 							// Set default player material
-							backhandEntry.SetText(T("unknown"))
+							backhandEntry.SetText("")
 						}
 						if bladeEntry.Text != "" {
 							bladeEntry.Text = standardizeSpaces(bladeEntry.Text)
@@ -165,7 +165,7 @@ func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 							}
 						} else {
 							// Set default player material
-							bladeEntry.SetText(T("unknown"))
+							bladeEntry.SetText("")
 						}
 
 						// Create the player
