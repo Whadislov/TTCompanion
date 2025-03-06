@@ -1,4 +1,7 @@
 {
+    "about_TTC": {
+        "other": "À propos de TT Companion"
+    },
     "add": {
         "other": "Ajouter"
     },
@@ -176,6 +179,9 @@
     "demo": {
         "other": "Démo"
     },
+    "description_of_the_app": {
+        "other": "Description de l’application :\nTT Companion est une application de gestion de clubs de tennis de table. L’utilisateur peut créer des clubs, des équipes, des joueurs et établir des relations entre eux. Toutes les modifications sont effectuées côté client et doivent être enregistrées avant de quitter l’application, soit via le menu principal, soit sur la page d’accueil. L’utilisateur peut également ajuster ses préférences de langue et de thème dans les options. N’oubliez pas de sauvegarder votre travail avant de quitter l’application !\nObjectif de l’application :\nLe but de cette application est de renforcer mes compétences en développement logiciel :\n- Langage backend : Golang\n- Langage frontend : Golang (Framework Fyne)\n- Gestion de versions : Git\n- Distribution : Via une image Docker contenant une version compressée du logiciel compilé en WebAssembly (WASM). La compression est réalisée avec Brotli.\n- Stockage : Github et Dockerhub. https://github.com/Whadislov/TTCompanion\n- Base de données : PostgreSQL, fourni par Neon.tech. Les mots de passe stockés sont chiffrés avec la fonction bcrypt.\n- Automatisation : Principalement GitHub Actions pour les déploiements, un peu de Jenkins pour les tests et les compilations.\n- Déploiement :\na) L’environnement d’essai fonctionne sur Render.com. https://ttcompanion.onrender.com\nb) L’environnement de production fonctionne sur Cloud Run. https://ttcompanion-prod-912172190800.europe-west9.run.app "
+    },
     "edit_email": {
         "other": "Modifier l'e-mail"
     },
@@ -271,6 +277,9 @@
     },
     "has_not_been_modified": {
         "other": "n'a pas été modifié"
+    },
+    "help": {
+        "other": "Aide"
     },
     "information": {
         "other": "Information"

@@ -1,4 +1,7 @@
 {
+    "about_TTC": {
+        "other": "À propos de TT Companion"
+    },
     "add": {
         "other": "Ajouter"
     },
@@ -271,6 +274,9 @@
     },
     "has_not_been_modified": {
         "other": "n'a pas été modifié"
+    },
+    "help": {
+        "other": "Aide"
     },
     "information": {
         "other": "Information"
