@@ -209,7 +209,6 @@ func loadThemeWeb(a fyne.App) {
 
 // loadingWindow opens a window that indicates that an operation is working
 func loadingWindow(w fyne.Window, stopChan chan string) {
-
 	ctodbStringSuffixes := []string{"", ".", "..", "..."}
 
 	ctodbStringInit := "Connecting to the database"
@@ -217,25 +216,20 @@ func loadingWindow(w fyne.Window, stopChan chan string) {
 	dialogWindow := dialog.NewInformation("Loading", ctodbString, w)
 	dialogWindow.Show()
 
-	go func() {
-		// timeout after 30 seconds
-		for i := range 30 {
-			time.Sleep(1 * time.Second)
-			ctodbString = ctodbStringInit + ctodbStringSuffixes[i%4]
-			dialogWindow.Refresh()
+	// timeout after 30 seconds
+	for i := range 30 {
+		time.Sleep(1 * time.Second)
+		ctodbString = ctodbStringInit + ctodbStringSuffixes[i%4]
+		dialogWindow.Hide()
+		dialogWindow := dialog.NewInformation("Loading", ctodbString, w)
+		result := <-stopChan
+		if result == "ok" {
+			close(stopChan)
+			dialogWindow.Hide()
+			return
 		}
-		stopChan <- "timeout"
-	}()
-	// Loaging finished naturally
-	switch result := <-stopChan; result {
-	case "ok":
-		close(stopChan)
-		dialogWindow.Hide()
-		return
-	case "timeout":
-		close(stopChan)
-		dialogWindow.Hide()
-		dialog.ShowError(fmt.Errorf("operation timed out"), w)
-		return
 	}
+	close(stopChan)
+	dialogWindow.Hide()
+	dialog.ShowError(fmt.Errorf("operation timed out"), w)
 }

@@ -178,7 +178,7 @@ func loginPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 	passwordEntry := widget.NewPasswordEntry()
 
 	validationButton := widget.NewButton(T("login"), func() {
-		stopChan := make(chan string)
+		stopChan := make(chan string, 1)
 		go func() {
 			loadingWindow(w, stopChan)
 		}()
