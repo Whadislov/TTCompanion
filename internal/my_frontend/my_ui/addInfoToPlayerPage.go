@@ -53,13 +53,27 @@ func AddInfoToSelectedPlayerPage(p *mt.Player, db *mt.Database, w fyne.Window, a
 
 	playerLabel := widget.NewLabel(fmt.Sprintf(T("you_have_selected")+" %v %v.", p.Firstname, p.Lastname))
 
+	// Do not display -1
+	var playerAgeStr string
+	if p.Age == -1 {
+		playerAgeStr = T("not_indicated")
+	} else {
+		playerAgeStr = strconv.Itoa(p.Age)
+	}
+	var playerRankingStr string
+	if p.Ranking == -1 {
+		playerRankingStr = T("not_indicated")
+	} else {
+		playerRankingStr = strconv.Itoa(p.Ranking)
+	}
+
 	// Here are optional informations that can be added to the player
 	ageEntry := widget.NewEntry()
-	entryAgeHolder := strconv.Itoa(p.Age)
+	entryAgeHolder := playerAgeStr
 	ageEntry.SetPlaceHolder(entryAgeHolder)
 
 	rankingEntry := widget.NewEntry()
-	entryRankingHolder := strconv.Itoa(p.Ranking)
+	entryRankingHolder := playerRankingStr
 	rankingEntry.SetPlaceHolder(entryRankingHolder)
 
 	forehandEntry := widget.NewEntry()

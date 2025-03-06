@@ -335,6 +335,9 @@
     "no_longer_plays_in_team": {
         "other": "no longer plays in team(s)"
     },
+    "not_indicated": {
+        "other": "Not indicated"
+    },
     "operation_timed_out": {
         "other": "Operation timed out"
     },

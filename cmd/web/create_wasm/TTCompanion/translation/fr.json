@@ -335,6 +335,9 @@
     "no_longer_plays_in_team": {
         "other": "Ne joue plus en équipe (s)"
     },
+    "not_indicated": {
+        "other": "Non renseigné"
+    },
     "operation_timed_out": {
         "other": "L'opération a expiré"
     },
