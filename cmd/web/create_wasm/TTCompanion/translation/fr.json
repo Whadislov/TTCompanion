@@ -293,6 +293,9 @@
     "lastname.must_not_be_empty": {
         "other": "Le nom de famille ne doit pas être vide"
     },
+    "loading": {
+        "other": "Chargement"
+    },
     "log_in": {
         "other": "Se connecter"
     },
@@ -331,6 +334,9 @@
     },
     "no_longer_plays_in_team": {
         "other": "Ne joue plus en équipe (s)"
+    },
+    "operation_timed_out": {
+        "other": "L'opération a expiré"
     },
     "options": {
         "other": "Options"
@@ -384,25 +390,25 @@
         "other": "Retirer"
     },
     "remove_club_from_a_player": {
-        "other": "Supprimer les clubs d'un joueur"
+        "other": "Supprimer un joueur du club"
     },
     "remove_confirm_selection": {
-        "other": "Supprimer: confirmer la sélection"
+        "other": "Supprimer des relations: confirmer la sélection"
     },
     "remove_player_from_a_team": {
-        "other": "Retirer les joueurs d'une équipe"
+        "other": "Supprimer un joueur d'une équipe"
     },
     "remove_relationships": {
         "other": "Supprimer des relations entres les éléments"
     },
     "remove_select_a_player": {
-        "other": "Supprimer: sélectionnez un joueur"
+        "other": "Supprimer des relations: sélectionnez un joueur"
     },
     "remove_select_a_team": {
-        "other": "Supprimer: sélectionnez une équipe"
+        "other": "Supprimer des relations: sélectionnez une équipe"
     },
     "remove_team_from_a_player": {
-        "other": "Supprimer l'équipe (s) d'un joueur"
+        "other": "Supprimer une équipe d'un joueur"
     },
     "reset_your_password": {
         "other": "Réinitialisez votre mot de passe"
