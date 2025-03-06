@@ -154,6 +154,8 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 	newMenu3 := fyne.NewMenu(T("functionalities"), menu3Item1, menu3Item2, menu3Item3, menu3Item4, menu3Item5)
 
 	menu4Item1 := fyne.NewMenuItem(T("about_TTC"), func() {
+		pageTitle := setTitle(T("about_TTC"), 32)
+
 		var text string
 		switch currentSelectedLanguage {
 		case "English":
@@ -171,6 +173,7 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 		})
 
 		content := container.NewVBox(
+			pageTitle,
 			widget.NewLabel(text),
 			returnToMainMenuButton,
 		)
