@@ -5,7 +5,6 @@ import (
 	"regexp"
 	"sort"
 	"strings"
-	"time"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -208,19 +207,12 @@ func loadThemeWeb(a fyne.App) {
 }
 
 // loadingWindow opens a window that indicates that an operation is working
-func loadingWindow(w fyne.Window, stopChan chan string) {
-	ctodbStringSuffixes := []string{"", ".", "..", "..."}
-
-	ctodbStringInit := "Connecting to the database"
-	dialogWindow := dialog.NewInformation("Loading", ctodbStringInit, w)
+func loadingWindow(msg string, w fyne.Window, stopChan chan string) {
+	dialogWindow := dialog.NewInformation("Loading", msg, w)
 	dialogWindow.Show()
 
 	// timeout after 30 seconds
-	for i := range 30 {
-		time.Sleep(200 * time.Millisecond)
-		dialogWindow.Hide()
-		dialogWindow := dialog.NewInformation("Loading", ctodbStringInit+ctodbStringSuffixes[i%4], w)
-		dialogWindow.Show()
+	for range 30 {
 		result := <-stopChan
 		if result == "ok" {
 			close(stopChan)
