@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"image/gif"
-	"os"
 	"regexp"
 	"sort"
 	"strings"
@@ -224,7 +223,7 @@ func loadingSpinnerStart(a fyne.App) (fyne.Window, chan struct{}) {
 
 	stopChan := make(chan struct{})
 
-	gifImage := startGIFAnimation(w, gifData, stopChan)
+	gifImage := startGIFAnimation(gifData, stopChan)
 
 	w.Resize(fyne.NewSize(300, 100))
 	w.SetContent(gifImage)
@@ -304,11 +303,13 @@ func loginWithSpinner(a fyne.App, username string, password string) (*mt.Databas
 // loadGIF loads a gif
 func loadGIF() (*gif.GIF, error) {
 
-	data, err := os.ReadFile("wasm/spinner_dark.gif")
+	// Load gif as a static resource
+	gifResource, err := fyne.LoadResourceFromPath("wasm/spinner_dark.gif")
 	if err != nil {
 		return nil, err
 	}
-	g, err := gif.DecodeAll(bytes.NewReader(data))
+
+	g, err := gif.DecodeAll(bytes.NewReader(gifResource.Content()))
 	if err != nil {
 		return nil, err
 	}
@@ -316,7 +317,7 @@ func loadGIF() (*gif.GIF, error) {
 }
 
 // startGIFAnimation creates an animation from a gif
-func startGIFAnimation(w fyne.Window, gifData *gif.GIF, stopChan chan struct{}) *canvas.Image {
+func startGIFAnimation(gifData *gif.GIF, stopChan chan struct{}) *canvas.Image {
 	// Create an inital image from the first frames
 	img := canvas.NewImageFromImage(gifData.Image[0])
 	img.FillMode = canvas.ImageFillContain
