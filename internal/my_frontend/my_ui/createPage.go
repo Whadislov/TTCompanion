@@ -17,7 +17,7 @@ import (
 // CreatePage sets up the page for creating players, teams, and clubs.
 func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 
-	pageTitle := setTitle(T("confirm"), 32)
+	pageTitle := setTitle(T("create_new_element"), 32)
 
 	ReturnToFonctionalityPageButton := widget.NewButton(T("return_to_functionalities"), func() {
 		fonctionalityPage := FunctionalityPage(db, w, a)

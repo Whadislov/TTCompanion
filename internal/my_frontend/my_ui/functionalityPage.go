@@ -17,10 +17,10 @@ func FunctionalityPage(db *mt.Database, w fyne.Window, a fyne.App) *fyne.Contain
 		w.SetContent(mainPage)
 	})
 
-	createMenuButton := widget.NewButton(T("create"), func() { CreatePage(db, w, a) })
-	createAddMenuButton := widget.NewButton(T("add"), func() { AddPage(db, w, a) })
-	createRemoveMenuButton := widget.NewButton(T("remove"), func() { RemovePage(db, w, a) })
-	createDeleteMenuButton := widget.NewButton(T("delete"), func() { DeletePage(db, w, a) })
+	createMenuButton := widget.NewButton(T("create_new_element"), func() { CreatePage(db, w, a) })
+	createAddMenuButton := widget.NewButton(T("add_relationships"), func() { AddPage(db, w, a) })
+	createRemoveMenuButton := widget.NewButton(T("remove_relationships"), func() { RemovePage(db, w, a) })
+	createDeleteMenuButton := widget.NewButton(T("delete_element"), func() { DeletePage(db, w, a) })
 	createAddInfoToPlayerButton := widget.NewButton(T("edit_player_information"), func() { AddInfoToPlayerPage(db, w, a) })
 
 	functionalityPage := container.NewVBox(
