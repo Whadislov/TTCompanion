@@ -46,13 +46,19 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 				}
 
 			} else if appStartOption == "browser" {
+				stopChan := make(chan string, 1)
+				go func() {
+					loadingWindow(T("saving"), w, stopChan)
+				}()
 				err := mr.SaveDB(credToken, db)
 				if err != nil {
+					stopChan <- "ok"
 					dialog.ShowError(err, w)
 				} else {
 					HasChanged = false
 					// Reload the database after saving (refresh the IDs)
 					db, err = mr.LoadDB(credToken)
+					stopChan <- "ok"
 					if err != nil {
 						dialog.ShowError(err, w)
 					} else {
@@ -67,9 +73,8 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 			dialog.ShowConfirm(T("unsaved_changes"), T("you_have_unsaved_changes"), func(confirm bool) {
 				if confirm {
 					// User wants to save the changes
-					var err error
 					if appStartOption == "local" {
-						err = mdb.SaveDB(db)
+						err := mdb.SaveDB(db)
 						if err != nil {
 							dialog.ShowError(err, w)
 						} else {
@@ -79,7 +84,12 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 							w.SetContent(AuthentificationPage(w, a))
 						}
 					} else if appStartOption == "browser" {
-						err = mr.SaveDB(credToken, db)
+						stopChan := make(chan string, 1)
+						go func() {
+							loadingWindow(T("saving"), w, stopChan)
+						}()
+						err := mr.SaveDB(credToken, db)
+						stopChan <- "ok"
 						if err != nil {
 							dialog.ShowError(err, w)
 						} else {

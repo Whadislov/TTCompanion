@@ -67,7 +67,12 @@ func UserPage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.App) {
 			if appStartOption == "local" {
 				err = mdb.SaveDB(db)
 			} else if appStartOption == "browser" {
+				stopChan := make(chan string, 1)
+				go func() {
+					loadingWindow(T("saving"), w, stopChan)
+				}()
 				err = mr.SaveDB(credToken, db)
+				stopChan <- "ok"
 			}
 
 			if err != nil {
@@ -90,7 +95,12 @@ func UserPage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.App) {
 							dialog.ShowError(err, w)
 						}
 					} else if appStartOption == "browser" {
+						stopChan := make(chan string, 1)
+						go func() {
+							loadingWindow(T("saving"), w, stopChan)
+						}()
 						err := mr.SaveDB(credToken, db)
+						stopChan <- "ok"
 						if err != nil {
 							dialog.ShowError(err, w)
 						}

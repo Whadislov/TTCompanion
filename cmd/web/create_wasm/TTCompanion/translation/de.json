@@ -92,6 +92,9 @@
     "connect": {
         "other": "Verbinden"
     },
+    "connecting": {
+        "other": "Wird verbindet"
+    },
     "create": {
         "other": "Erstellen"
     },
@@ -425,11 +428,17 @@
     "return_to_the_create_menu": {
         "other": "Zurück zum Menü erstellen"
     },
+    "save": {
+        "other": "Speichern"
+    },
     "save_before_quit": {
         "other": "Sie haben nicht gerettete Änderungen. Möchten Sie sie speichern, bevor Sie aufhören?"
     },
     "save_changes": {
         "other": "Änderungen speichern"
+    },
+    "saving": {
+        "other": "Wird gespeichert"
     },
     "select_a_club": {
         "other": "Wählen Sie einen Verein aus"

@@ -205,3 +205,22 @@ func loadThemeWeb(a fyne.App) {
 	darkTheme.IsActivated = true
 	a.Settings().SetTheme(&darkTheme)
 }
+
+// loadingWindow opens a window that indicates that an operation is working
+func loadingWindow(msg string, w fyne.Window, stopChan chan string) {
+	dialogWindow := dialog.NewInformation("Loading", msg, w)
+	dialogWindow.Show()
+
+	// timeout after 30 seconds
+	for range 30 {
+		result := <-stopChan
+		if result == "ok" {
+			close(stopChan)
+			dialogWindow.Hide()
+			return
+		}
+	}
+	close(stopChan)
+	dialogWindow.Hide()
+	dialog.ShowError(fmt.Errorf("operation timed out"), w)
+}

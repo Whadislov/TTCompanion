@@ -92,6 +92,9 @@
     "connect": {
         "other": "Connect"
     },
+    "connecting": {
+        "other": "Connecting"
+    },
     "create": {
         "other": "Create"
     },
@@ -425,11 +428,17 @@
     "return_to_the_create_menu": {
         "other": "Return to the create menu"
     },
+    "save": {
+        "other": "Save"
+    },
     "save_before_quit": {
         "other": "You have unsaved changes. Do you want to save them before quitting?"
     },
     "save_changes": {
         "other": "Save changes"
+    },
+    "saving": {
+        "other": "Saving"
     },
     "select_a_club": {
         "other": "Select a club"
