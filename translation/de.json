@@ -335,6 +335,9 @@
     "no_longer_plays_in_team": {
         "other": "spielt nicht mehr in Teams (en)"
     },
+    "not_indicated": {
+        "other": "Nicht angegeben"
+    },
     "operation_timed_out": {
         "other": "Zeitüberschreitung der Operation"
     },

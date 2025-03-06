@@ -141,7 +141,7 @@ func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 							}
 						} else {
 							// Set default player material
-							forehandEntry.SetText(T("unknown"))
+							forehandEntry.SetText(T("not_indicated"))
 						}
 						if backhandEntry.Text != "" {
 							backhandEntry.Text = standardizeSpaces(backhandEntry.Text)
@@ -153,7 +153,7 @@ func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 							}
 						} else {
 							// Set default player material
-							backhandEntry.SetText(T("unknown"))
+							backhandEntry.SetText(T("not_indicated"))
 						}
 						if bladeEntry.Text != "" {
 							bladeEntry.Text = standardizeSpaces(bladeEntry.Text)
@@ -165,7 +165,7 @@ func CreatePage(db *mt.Database, w fyne.Window, a fyne.App) {
 							}
 						} else {
 							// Set default player material
-							bladeEntry.SetText(T("unknown"))
+							bladeEntry.SetText(T("not_indicated"))
 						}
 
 						// Create the player

@@ -30,8 +30,22 @@ func PlayerInfos(player *mt.Player) *fyne.Container {
 	// Sort clubs alphabetically
 	slices.Sort(clubs)
 
+	// Do not display -1
+	var playerAgeStr string
+	if player.Age == -1 {
+		playerAgeStr = T("not_indicated")
+	} else {
+		playerAgeStr = strconv.Itoa(player.Age)
+	}
+	var playerRankingStr string
+	if player.Ranking == -1 {
+		playerRankingStr = T("not_indicated")
+	} else {
+		playerRankingStr = strconv.Itoa(player.Ranking)
+	}
+
 	leftText := T("firstname") + ":\n" + T("lastname") + ":\n" + T("age") + ":\n" + T("forehand") + ":\n" + T("backhand") + ":\n" + T("blade") + ":\n" + T("ranking") + ":\n" + T("teams") + ":\n" + T("clubs") + ":"
-	rightText := player.Firstname + "\n" + player.Lastname + "\n" + strconv.Itoa(player.Age) + "\n" + player.Material[0] + "\n" + player.Material[1] + "\n" + player.Material[2] + "\n" + strconv.Itoa(player.Ranking) + "\n" + strHelper(teams) + "\n" + strHelper(clubs)
+	rightText := player.Firstname + "\n" + player.Lastname + "\n" + playerAgeStr + "\n" + player.Material[0] + "\n" + player.Material[1] + "\n" + player.Material[2] + "\n" + playerRankingStr + "\n" + strHelper(teams) + "\n" + strHelper(clubs)
 
 	playerInfosContent := container.NewGridWithColumns(2, widget.NewLabel(leftText), widget.NewLabel(rightText))
 	return playerInfosContent
