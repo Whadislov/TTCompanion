@@ -293,6 +293,9 @@
     "lastname.must_not_be_empty": {
         "other": "lastname must not be empty"
     },
+    "loading": {
+        "other": "Loading"
+    },
     "log_in": {
         "other": "Log in"
     },
@@ -331,6 +334,9 @@
     },
     "no_longer_plays_in_team": {
         "other": "no longer plays in team(s)"
+    },
+    "operation_timed_out": {
+        "other": "Operation timed out"
     },
     "options": {
         "other": "Options"
@@ -384,10 +390,10 @@
         "other": "Remove"
     },
     "remove_club_from_a_player": {
-        "other": "Remove club(s) from a player"
+        "other": "Remove player from a club"
     },
     "remove_confirm_selection": {
-        "other": "Remove: confirm selection"
+        "other": "Remove relationships: confirm selection"
     },
     "remove_player_from_a_team": {
         "other": "Remove player(s) from a team"
@@ -396,10 +402,10 @@
         "other": "Remove relationships between elements"
     },
     "remove_select_a_player": {
-        "other": "Remove: select a player"
+        "other": "Remove relationships: select a player"
     },
     "remove_select_a_team": {
-        "other": "Remove: select a team"
+        "other": "Remove relationships: select a team"
     },
     "remove_team_from_a_player": {
         "other": "Remove team(s) from a player"

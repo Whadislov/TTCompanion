@@ -49,8 +49,12 @@ func AuthentificationPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 	})
 
 	demoButton := widget.NewButton(T("demo"), func() {
-
+		stopChan := make(chan string, 1)
+		go func() {
+			loadingWindow(T("connecting"), w, stopChan)
+		}()
 		db, token, err := mr.Login("demo", "demo")
+		stopChan <- "ok"
 		if err != nil {
 			dialog.ShowError(errors.New(T("internal_error")), w)
 		}
