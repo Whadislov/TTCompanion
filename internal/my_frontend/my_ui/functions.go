@@ -1,10 +1,7 @@
 package myapp
 
 import (
-	"bytes"
-	"errors"
 	"fmt"
-	"image/gif"
 	"regexp"
 	"sort"
 	"strings"
@@ -16,7 +13,6 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
-	mr "github.com/Whadislov/TTCompanion/internal/my_frontend/my_requests"
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
 	"github.com/google/uuid"
 )
@@ -211,132 +207,35 @@ func loadThemeWeb(a fyne.App) {
 	a.Settings().SetTheme(&darkTheme)
 }
 
-// loadingSpinnerStart starts a spinner gif that indicates that an operation is working
-func loadingSpinnerStart(a fyne.App) (fyne.Window, chan struct{}) {
-	w := a.NewWindow("Loading")
+// loadingWindow opens a window that indicates that an operation is working
+func loadingWindow(w fyne.Window, stopChan chan string) {
 
-	gifData, err := loadGIF()
-	if err != nil {
-		dialog.ShowError(err, w)
-		return w, nil
-	}
+	ctodbStringSuffixes := []string{"", ".", "..", "..."}
 
-	stopChan := make(chan struct{})
-
-	gifImage := startGIFAnimation(gifData, stopChan)
-
-	w.Resize(fyne.NewSize(300, 100))
-	w.SetContent(gifImage)
-	w.CenterOnScreen()
-	w.SetCloseIntercept(func() {
-		// User can't close
-	})
-	w.Show()
-
-	return w, stopChan
-}
-
-// loadDatabaseWithSpinner uses a spinner gif to indicate that the database is loading
-func loadDatabaseWithSpinner(a fyne.App, credToken string) (*mt.Database, error) {
-	w, stopChan := loadingSpinnerStart(a)
-
-	resultChan := make(chan struct {
-		db  *mt.Database // Remplace par ton type
-		err error
-	})
+	ctodbStringInit := "Connecting to the database"
+	ctodbString := ctodbStringInit
+	dialogWindow := dialog.NewInformation("Loading", ctodbString, w)
+	dialogWindow.Show()
 
 	go func() {
-		db, err := mr.LoadDB(credToken) // Ton chargement de DB
-		resultChan <- struct {
-			db  *mt.Database
-			err error
-		}{db, err}
-	}()
-
-	timeout := time.After(1 * time.Minute)
-
-	select {
-	case result := <-resultChan:
-		close(stopChan) // Arrête l'animation
-		w.Close()
-		return result.db, result.err
-	case <-timeout:
-		close(stopChan) // Arrête l'animation
-		w.Close()
-		return nil, errors.New("operation timed out")
-	}
-}
-
-// loadDatabaseWithSpinner uses a spinner gif to indicate that the database is loading
-func loginWithSpinner(a fyne.App, username string, password string) (*mt.Database, string, error) {
-	w, stopChan := loadingSpinnerStart(a)
-
-	resultChan := make(chan struct {
-		db    *mt.Database
-		token string
-		err   error
-	})
-
-	go func() {
-		db, token, err := mr.Login(username, password)
-		resultChan <- struct {
-			db    *mt.Database
-			token string
-			err   error
-		}{db, token, err}
-	}()
-
-	timeout := time.After(1 * time.Minute)
-
-	select {
-	case result := <-resultChan:
-		close(stopChan) // Arrête l'animation
-		w.Close()
-		return result.db, result.token, result.err
-	case <-timeout:
-		close(stopChan) // Arrête l'animation
-		w.Close()
-		return nil, "", errors.New("operation timed out")
-	}
-}
-
-// loadGIF loads a gif
-func loadGIF() (*gif.GIF, error) {
-
-	// Load gif as a static resource
-	gifResource, err := fyne.LoadResourceFromPath("wasm/spinner_dark.gif")
-	if err != nil {
-		return nil, err
-	}
-
-	g, err := gif.DecodeAll(bytes.NewReader(gifResource.Content()))
-	if err != nil {
-		return nil, err
-	}
-	return g, nil
-}
-
-// startGIFAnimation creates an animation from a gif
-func startGIFAnimation(gifData *gif.GIF, stopChan chan struct{}) *canvas.Image {
-	// Create an inital image from the first frames
-	img := canvas.NewImageFromImage(gifData.Image[0])
-	img.FillMode = canvas.ImageFillContain
-	img.SetMinSize(fyne.NewSize(100, 100))
-
-	// Animation
-	go func() {
-		frame := 0
-		for {
-			select {
-			case <-time.After(time.Duration(gifData.Delay[frame]*10) * time.Millisecond): // respects gif delays
-				frame = (frame + 1) % len(gifData.Image) // Loop on frames
-				img.Image = gifData.Image[frame]
-				img.Refresh()
-			case <-stopChan: // Stops the animation if called
-				return
-			}
+		// timeout after 30 seconds
+		for i := range 30 {
+			time.Sleep(1 * time.Second)
+			ctodbString = ctodbStringInit + ctodbStringSuffixes[i%4]
+			dialogWindow.Refresh()
 		}
+		stopChan <- "timeout"
 	}()
-
-	return img
+	// Loaging finished naturally
+	switch result := <-stopChan; result {
+	case "ok":
+		close(stopChan)
+		dialogWindow.Hide()
+		return
+	case "timeout":
+		close(stopChan)
+		dialogWindow.Hide()
+		dialog.ShowError(fmt.Errorf("operation timed out"), w)
+		return
+	}
 }
