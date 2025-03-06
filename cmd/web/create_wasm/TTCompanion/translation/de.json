@@ -293,6 +293,9 @@
     "lastname.must_not_be_empty": {
         "other": "Der Nachname darf nicht leer sein"
     },
+    "loading": {
+        "other": "Wird geladen"
+    },
     "log_in": {
         "other": "Einloggen"
     },
@@ -331,6 +334,9 @@
     },
     "no_longer_plays_in_team": {
         "other": "spielt nicht mehr in Teams (en)"
+    },
+    "operation_timed_out": {
+        "other": "Zeitüberschreitung der Operation"
     },
     "options": {
         "other": "Optionen"
@@ -384,10 +390,10 @@
         "other": "Entfernen"
     },
     "remove_club_from_a_player": {
-        "other": "Verein(e) von einem Spieler entfernen"
+        "other": "Spieler aus einem Verein entfernen"
     },
     "remove_confirm_selection": {
-        "other": "Entfernen: Auswahl bestätigen"
+        "other": "Beziehungen zwischen Elementen entfernen: Auswahl bestätigen"
     },
     "remove_player_from_a_team": {
         "other": "Spieler aus einem Team entfernen"
@@ -396,10 +402,10 @@
         "other": "Beziehungen zwischen Elementen entfernen"
     },
     "remove_select_a_player": {
-        "other": "Entfernen: Einen Spieler auswählen"
+        "other": "Beziehungen zwischen Elementen entfernen: Einen Spieler auswählen"
     },
     "remove_select_a_team": {
-        "other": "Entfernen: Ein Team auswählen"
+        "other": "Beziehungen zwischen Elementen entfernen: Ein Team auswählen"
     },
     "remove_team_from_a_player": {
         "other": "Team(s) von einem Spieler entfernen"

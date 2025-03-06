@@ -208,7 +208,8 @@ func loadThemeWeb(a fyne.App) {
 
 // loadingWindow opens a window that indicates that an operation is working
 func loadingWindow(msg string, w fyne.Window, stopChan chan string) {
-	dialogWindow := dialog.NewInformation("Loading", msg, w)
+
+	dialogWindow := dialog.NewCustomWithoutButtons(T("loading"), widget.NewLabel(msg), w)
 	dialogWindow.Show()
 
 	// timeout after 30 seconds
@@ -222,5 +223,5 @@ func loadingWindow(msg string, w fyne.Window, stopChan chan string) {
 	}
 	close(stopChan)
 	dialogWindow.Hide()
-	dialog.ShowError(fmt.Errorf("operation timed out"), w)
+	dialog.ShowError(fmt.Errorf(T("operation_timed_out")), w)
 }
