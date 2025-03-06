@@ -11,7 +11,7 @@ import (
 // RemovePage sets up the main page for removing players from teams and vice versa.
 func RemovePage(db *mt.Database, w fyne.Window, a fyne.App) {
 
-	pageTitle := setTitle(T("remove"), 32)
+	pageTitle := setTitle(T("remove_relationships"), 32)
 
 	ReturnToFonctionalityPageButton := widget.NewButton(T("return_to_functionalities"), func() {
 		fonctionalityPage := FunctionalityPage(db, w, a)

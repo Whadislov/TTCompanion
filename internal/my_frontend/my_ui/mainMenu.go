@@ -146,10 +146,10 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 	menu2Item3 := fyne.NewMenuItem(T("clubs"), func() { ClubPage(db, w, a) })
 	newMenu2 := fyne.NewMenu(T("database"), menu2Item1, menu2Item2, menu2Item3)
 
-	menu3Item1 := fyne.NewMenuItem(T("create"), func() { CreatePage(db, w, a) })
-	menu3Item2 := fyne.NewMenuItem(T("add"), func() { AddPage(db, w, a) })
-	menu3Item3 := fyne.NewMenuItem(T("remove"), func() { RemovePage(db, w, a) })
-	menu3Item4 := fyne.NewMenuItem(T("delete"), func() { DeletePage(db, w, a) })
+	menu3Item1 := fyne.NewMenuItem(T("create_new_element"), func() { CreatePage(db, w, a) })
+	menu3Item2 := fyne.NewMenuItem(T("add_relationships"), func() { AddPage(db, w, a) })
+	menu3Item3 := fyne.NewMenuItem(T("remove_relationships"), func() { RemovePage(db, w, a) })
+	menu3Item4 := fyne.NewMenuItem(T("delete_element"), func() { DeletePage(db, w, a) })
 	menu3Item5 := fyne.NewMenuItem(T("edit_player_information"), func() { AddInfoToPlayerPage(db, w, a) })
 	newMenu3 := fyne.NewMenu(T("functionalities"), menu3Item1, menu3Item2, menu3Item3, menu3Item4, menu3Item5)
 

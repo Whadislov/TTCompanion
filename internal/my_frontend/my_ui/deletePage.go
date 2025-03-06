@@ -20,7 +20,7 @@ func DeletePage(db *mt.Database, w fyne.Window, a fyne.App) {
 	// Rebuild UI on modifications
 	rebuildUI = func() {
 
-		pageTitle := setTitle(T("delete"), 32)
+		pageTitle := setTitle(T("delete_element"), 32)
 
 		pLabel := widget.NewLabel(T("players"))
 		tLabel := widget.NewLabel(T("teams"))

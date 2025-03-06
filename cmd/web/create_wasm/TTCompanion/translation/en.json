@@ -20,6 +20,9 @@
     "add_player_to_a_team": {
         "other": "Add player(s) to a team"
     },
+    "add_relationships": {
+        "other": "Add relationships between elements"
+    },
     "add_select_a_club": {
         "other": "Add: select a club"
     },
@@ -45,7 +48,7 @@
         "other": "Authentification"
     },
     "backhand": {
-        "other": "Backhand"
+        "other": "Backhand Rubber"
     },
     "blade": {
         "other": "Blade"
@@ -98,6 +101,9 @@
     "create": {
         "other": "Create"
     },
+    "create_new_element": {
+        "other": "Create a new element"
+    },
     "create_a_new_club": {
         "other": "Create a new club"
     },
@@ -145,6 +151,9 @@
     },
     "delete": {
         "other": "Delete"
+    },
+    "delete_element": {
+        "other": "Delete element"
     },
     "delete_player": {
         "other": "Delete player %v %v?"
@@ -246,7 +255,7 @@
         "other": "firstname must not be empty"
     },
     "forehand": {
-        "other": "Forehand"
+        "other": "Forehand rubber"
     },
     "forgot_password": {
         "other": "Forgot your password?"
@@ -369,7 +378,7 @@
         "other": "Quit"
     },
     "ranking": {
-        "other": "Ranking"
+        "other": "Ranking (points)"
     },
     "remove": {
         "other": "Remove"
@@ -382,6 +391,9 @@
     },
     "remove_player_from_a_team": {
         "other": "Remove player(s) from a team"
+    },
+    "remove_relationships": {
+        "other": "Remove relationships between elements"
     },
     "remove_select_a_player": {
         "other": "Remove: select a player"
@@ -561,7 +573,7 @@
         "other": "Welcome to TT Companion"
     },
     "wrong_password": {
-        "other": "wrong password"
+        "other": "Wrong password"
     },
     "yes": {
         "other": "Yes"
