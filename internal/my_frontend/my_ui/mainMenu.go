@@ -153,7 +153,32 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 	menu3Item5 := fyne.NewMenuItem(T("edit_player_information"), func() { AddInfoToPlayerPage(db, w, a) })
 	newMenu3 := fyne.NewMenu(T("functionalities"), menu3Item1, menu3Item2, menu3Item3, menu3Item4, menu3Item5)
 
-	menu := fyne.NewMainMenu(newMenu1, newMenu2, newMenu3)
+	menu4Item1 := fyne.NewMenuItem(T("about_TTC"), func() {
+		var text string
+		switch currentSelectedLanguage {
+		case "English":
+			text = enDescription
+		case "Français":
+			text = frDescription
+		case "Deutsch":
+			text = deDescription
+		default:
+			text = enDescription
+		}
+
+		returnToMainMenuButton := widget.NewButton(T("return_to_main_page"), func() {
+			w.SetContent(MainPage(db, w, a))
+		})
+
+		content := container.NewVBox(
+			widget.NewLabel(text),
+			returnToMainMenuButton,
+		)
+		w.SetContent(content)
+	})
+
+	newMenu4 := fyne.NewMenu(T("about_TTC"), menu4Item1)
+	menu := fyne.NewMainMenu(newMenu1, newMenu2, newMenu3, newMenu4)
 
 	return menu
 

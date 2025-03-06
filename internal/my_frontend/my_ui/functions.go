@@ -184,10 +184,10 @@ func sexText(s string, size float32) *canvas.Text {
 				return theme.VariantLight
 			}
 		}())
-	title := canvas.NewText(s, themeColor)
-	title.Alignment = fyne.TextAlignCenter
-	title.TextSize = size
-	return title
+	text := canvas.NewText(s, themeColor)
+	text.Alignment = fyne.TextAlignCenter
+	text.TextSize = size
+	return text
 }
 
 // loadTheme sets the flags for the light Theme and the dark Theme
