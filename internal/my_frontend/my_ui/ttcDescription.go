@@ -17,12 +17,12 @@ Der Zweck dieser Anwendung ist es, meine Fähigkeiten in der Softwareentwicklung
     • Frontend-Sprache: Golang (Framework Fyne) 
     • Versionsverwaltung: Git 
     • Verteilung: Über ein Docker-Image, das eine komprimierte Version der kompilierten Software in WebAssembly (WASM) enthält. Die Komprimierung erfolgt mit Brotli. 
-    • Speicherung: Github und Dockerhub. https://github.com/Whadislov/TTCompanion 
+    • Speicherung: Github und Dockerhub.
     • Datenbank: PostgreSQL, bereitgestellt von Neon.tech. Gespeicherte Passwörter sind mit der Funktion bcrypt verschlüsselt. 
     • Automatisierung: Hauptsächlich GitHub Actions für Bereitstellungen, etwas Jenkins für Tests und Kompilierungen. 
     • Bereitstellung: 
-        • Die Staging-Umgebung läuft auf Render.com. https://ttcompanion.onrender.com 
-        • Die Produktionsumgebung läuft auf Cloud Run. https://ttcompanion-prod-912172190800.europe-west9.run.app`)
+        • Die Staging-Umgebung läuft auf Render.com. 
+        • Die Produktionsumgebung läuft auf Cloud Run.`)
 
 var frDescription string = fmt.Sprintln(`Description de l’application:
 
@@ -37,12 +37,12 @@ Le but de cette application est de renforcer mes compétences en développement 
     • Langage frontend : Golang (Framework Fyne) 
     • Gestion de versions : Git 
     • Distribution : Via une image Docker contenant une version compressée du logiciel compilé en WebAssembly (WASM). La compression est réalisée avec Brotli. 
-    • Stockage : Github et Dockerhub. https://github.com/Whadislov/TTCompanion 
+    • Stockage : Github et Dockerhub.
     • Base de données : PostgreSQL, fourni par Neon.tech. Les mots de passe stockés sont chiffrés avec la fonction bcrypt. 
     • Automatisation : Principalement GitHub Actions pour les déploiements, un peu de Jenkins pour les tests et les compilations. 
     • Déploiement : 
-        • L’environnement de staging fonctionne sur Render.com. https://ttcompanion.onrender.com 
-        • L’environnement de production fonctionne sur Cloud Run. https://ttcompanion-prod-912172190800.europe-west9.run.app`)
+        • L’environnement de staging fonctionne sur Render.com.
+        • L’environnement de production fonctionne sur Cloud Run.`)
 
 var enDescription string = fmt.Sprintln(`Description of the Application:
 
@@ -57,9 +57,9 @@ The purpose of this application is to enhance my software development skills:
     • Frontend language: Golang (Framework Fyne) 
     • Version management: Git 
     • Distribution: Via a Docker image containing a compressed version of the compiled software in WebAssembly (WASM). Compression is handled with Brotli. 
-    • Storage: Github and Dockerhub. https://github.com/Whadislov/TTCompanion 
+    • Storage: Github and Dockerhub.
     • Database: PostgreSQL, provided by Neon.tech. Stored passwords are encrypted using the bcrypt function. 
     • Automation: Primarily GitHub Actions for deployments, with some Jenkins for tests and compilations. 
     • Deployment: 
-        • The staging environment runs on Render.com. https://ttcompanion.onrender.com 
-        • The production environment runs on Cloud Run. https://ttcompanion-prod-912172190800.europe-west9.run.app`)
+        • The staging environment runs on Render.com.
+        • The production environment runs on Cloud Run.`)
