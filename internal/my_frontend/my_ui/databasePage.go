@@ -13,8 +13,7 @@ func DatabasePage(db *mt.Database, w fyne.Window, a fyne.App) *fyne.Container {
 	pageTitle := setTitle(T("your_database"), 32)
 
 	returnToMainMenuButton := widget.NewButton(T("return_to_main_page"), func() {
-		mainPage := MainPage(db, w, a)
-		w.SetContent(mainPage)
+		MainPage(db, w, a)
 	})
 
 	playerButton := widget.NewButton(T("your_players"), func() { PlayerPage(db, w, a) })

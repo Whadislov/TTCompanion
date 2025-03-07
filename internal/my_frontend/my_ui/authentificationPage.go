@@ -75,7 +75,7 @@ func AuthentificationPage(w fyne.Window, a fyne.App) *fyne.Container {
 						dialog.ShowError(err, w)
 					} else {
 						userOfSession = db.Users[user.ID]
-						w.SetContent(MainPage(db, w, a))
+						MainPage(db, w, a)
 						w.SetMainMenu(MainMenu(db, w, a))
 						return
 					}
@@ -187,7 +187,7 @@ func signUpPage(w fyne.Window, a fyne.App) *fyne.Container {
 				for _, user := range db.Users {
 					userOfSession = user
 					mdb.SetUserIDOfSession(userOfSession.ID)
-					w.SetContent(MainPage(db, w, a))
+					MainPage(db, w, a)
 					w.SetMainMenu(MainMenu(db, w, a))
 					return
 				}
@@ -254,7 +254,7 @@ func loginPage(w fyne.Window, a fyne.App) *fyne.Container {
 						dialog.ShowError(err, w)
 					} else {
 						userOfSession = db.Users[user.ID]
-						w.SetContent(MainPage(db, w, a))
+						MainPage(db, w, a)
 						w.SetMainMenu(MainMenu(db, w, a))
 						return
 					}

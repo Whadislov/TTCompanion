@@ -109,10 +109,10 @@ func UserPage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.App) {
 				//Reset flag in both case
 				HasUserProfileChanged = false
 				//Set Main page in both case
-				w.SetContent(MainPage(db, w, a))
+				MainPage(db, w, a)
 			}, w)
 		} else {
-			w.SetContent(MainPage(db, w, a))
+			MainPage(db, w, a)
 		}
 	})
 

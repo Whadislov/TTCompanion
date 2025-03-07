@@ -68,7 +68,7 @@ func AuthentificationPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 				dialog.ShowError(errors.New(T("failed_to_load_profile")), w)
 			}
 		}
-		w.SetContent(MainPage(db, w, a))
+		MainPage(db, w, a)
 		w.SetMainMenu(MainMenu(db, w, a))
 	})
 
@@ -149,7 +149,7 @@ func signUpPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 						dialog.ShowError(errors.New(T("failed_to_load_profile")), w)
 					}
 				}
-				w.SetContent(MainPage(db, w, a))
+				MainPage(db, w, a)
 				w.SetMainMenu(MainMenu(db, w, a))
 			}
 		}
@@ -215,7 +215,7 @@ func loginPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 					dialog.ShowError(errors.New(T("failed_to_load_profile")), w)
 				}
 			}
-			w.SetContent(MainPage(db, w, a))
+			MainPage(db, w, a)
 			w.SetMainMenu(MainMenu(db, w, a))
 		}
 	})
