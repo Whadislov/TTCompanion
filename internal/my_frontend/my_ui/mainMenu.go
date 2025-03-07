@@ -17,13 +17,11 @@ import (
 // MainMenu creates the menus
 func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 
-	mainPage := MainPage(db, w, a)
-
-	menu1Item1 := fyne.NewMenuItem(T("main_page"), func() { w.SetContent(mainPage) })
+	menu1Item1 := fyne.NewMenuItem(T("main_page"), func() { MainPage(db, w, a) })
 	menu1Item2 := fyne.NewMenuItem(T("my_profile"), func() { UserPage(userOfSession, db, w, a) })
 	menu1Item3 := fyne.NewMenuItem(T("options"), func() {
 		returnToMainMenuButton := widget.NewButton(T("return_to_main_page"), func() {
-			w.SetContent(MainPage(db, w, a))
+			MainPage(db, w, a)
 		})
 		w.SetContent(container.NewVBox(OptionPage(db, w, a), returnToMainMenuButton))
 	})
@@ -177,7 +175,7 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 		cloudRunHyperlink := widget.NewHyperlink("Cloud Run server", cloudRunURL)
 
 		returnToMainMenuButton := widget.NewButton(T("return_to_main_page"), func() {
-			w.SetContent(MainPage(db, w, a))
+			MainPage(db, w, a)
 		})
 
 		content := container.NewVBox(

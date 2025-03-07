@@ -14,7 +14,7 @@ import (
 )
 
 // MainPage creates the main page
-func MainPage(db *mt.Database, w fyne.Window, a fyne.App) *fyne.Container {
+func MainPage(db *mt.Database, w fyne.Window, a fyne.App) {
 
 	var mainPage *fyne.Container
 	pageTitle := setTitle("TT Companion", 32)
@@ -30,7 +30,7 @@ func MainPage(db *mt.Database, w fyne.Window, a fyne.App) *fyne.Container {
 	// Options button
 	OptionButton := widget.NewButton(T("options"), func() {
 		returnToMainMenuButton := widget.NewButton(T("return_to_main_page"), func() {
-			w.SetContent(MainPage(db, w, a))
+			MainPage(db, w, a)
 		})
 		w.SetContent(container.NewVBox(OptionPage(db, w, a), returnToMainMenuButton))
 	})
@@ -158,6 +158,6 @@ func MainPage(db *mt.Database, w fyne.Window, a fyne.App) *fyne.Container {
 		Quit(db, w, a, HasChanged)
 	})
 
-	return mainPage
+	w.SetContent(mainPage)
 
 }
