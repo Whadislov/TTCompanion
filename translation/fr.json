@@ -71,6 +71,9 @@
     "changes_saved": {
         "other": "Modifications enregistrées"
     },
+    "cant_change_demo_account": {
+        "other": "Vous ne pouvez pas éditer le compte démo"
+    },
     "club": {
         "other": "Club"
     },
@@ -179,6 +182,9 @@
     "demo": {
         "other": "Démo"
     },
+    "description_of_the_app": {
+        "other": "Description de l’application :\nTT Companion est une application de gestion de clubs de tennis de table. L’utilisateur peut créer des clubs, des équipes, des joueurs et établir des relations entre eux. Toutes les modifications sont effectuées côté client et doivent être enregistrées avant de quitter l’application, soit via le menu principal, soit sur la page d’accueil. L’utilisateur peut également ajuster ses préférences de langue et de thème dans les options. N’oubliez pas de sauvegarder votre travail avant de quitter l’application !\nObjectif de l’application :\nLe but de cette application est de renforcer mes compétences en développement logiciel :\n- Langage backend : Golang\n- Langage frontend : Golang (Framework Fyne)\n- Gestion de versions : Git\n- Distribution : Via une image Docker contenant une version compressée du logiciel compilé en WebAssembly (WASM). La compression est réalisée avec Brotli.\n- Stockage : Github et Dockerhub. https://github.com/Whadislov/TTCompanion\n- Base de données : PostgreSQL, fourni par Neon.tech. Les mots de passe stockés sont chiffrés avec la fonction bcrypt.\n- Automatisation : Principalement GitHub Actions pour les déploiements, un peu de Jenkins pour les tests et les compilations.\n- Déploiement :\na) L’environnement d’essai fonctionne sur Render.com. https://ttcompanion.onrender.com\nb) L’environnement de production fonctionne sur Cloud Run. https://ttcompanion-prod-912172190800.europe-west9.run.app "
+    },
     "edit_email": {
         "other": "Modifier l'e-mail"
     },
@@ -243,7 +249,7 @@
         "other": "Impossible de charger votre profil"
     },
     "failed_to_log_in": {
-        "other": "Échec de la connexion:"
+        "other": "Échec de la connexion"
     },
     "failed_to_sign_up": {
         "other": "Échec de l'inscription: le nom d'utilisateur ou le courrier électronique existe déjà"
@@ -300,7 +306,7 @@
         "other": "Le nom de famille ne doit pas être vide"
     },
     "loading": {
-        "other": "Chargement"
+        "other": "Chargement de la base de données"
     },
     "log_in": {
         "other": "Se connecter"
@@ -339,7 +345,7 @@
         "other": "Non"
     },
     "no_longer_plays_in_team": {
-        "other": "Ne joue plus en équipe (s)"
+        "other": "Ne joue plus en équipe"
     },
     "not_indicated": {
         "other": "Non renseigné"
@@ -459,7 +465,7 @@
         "other": "Sauvegarder"
     },
     "save_before_quit": {
-        "other": "Vous avez des changements non sauvés. Voulez-vous les sauver avant d'arrêter?"
+        "other": "Vous avez des changements non sauvés. Voulez-vous les sauver avant de quitter?"
     },
     "save_changes": {
         "other": "Enregistrer les modifications"

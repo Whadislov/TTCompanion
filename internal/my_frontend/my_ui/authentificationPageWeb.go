@@ -201,7 +201,7 @@ func loginPageWeb(w fyne.Window, a fyne.App) *fyne.Container {
 				w.SetContent(loginPageWeb(w, a))
 				return
 			} else {
-				dialog.ShowError(fmt.Errorf(T("failed_to_log_in"), " %v", err), w)
+				dialog.ShowError(fmt.Errorf(T("failed_to_log_in"), ": %v", err), w)
 				w.SetContent(loginPageWeb(w, a))
 				return
 			}

@@ -71,6 +71,9 @@
     "changes_saved": {
         "other": "Changes saved"
     },
+    "cant_change_demo_account": {
+        "other": "You are not allowed to edit the demo account"
+    },
     "club": {
         "other": "Club"
     },
@@ -246,7 +249,7 @@
         "other": "Failed to load your profile"
     },
     "failed_to_log_in": {
-        "other": "Failed to log in: "
+        "other": "Failed to log in"
     },
     "failed_to_sign_up": {
         "other": "Failed to sign up: Username or e-mail already exists"
@@ -303,7 +306,7 @@
         "other": "lastname must not be empty"
     },
     "loading": {
-        "other": "Loading"
+        "other": "Loading of the database"
     },
     "log_in": {
         "other": "Log in"
@@ -342,7 +345,7 @@
         "other": "No"
     },
     "no_longer_plays_in_team": {
-        "other": "no longer plays in team(s)"
+        "other": "no longer plays in team"
     },
     "not_indicated": {
         "other": "Not indicated"

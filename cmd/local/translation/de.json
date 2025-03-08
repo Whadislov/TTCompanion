@@ -45,7 +45,7 @@
         "other": "spielen nicht mehr in"
     },
     "attention": {
-        "other": "Warning"
+        "other": "Warnhinweis"
     },
     "authentification": {
         "other": "Authentifizierung"
@@ -70,6 +70,9 @@
     },
     "changes_saved": {
         "other": "Änderungen gespeichert"
+    },
+    "cant_change_demo_account": {
+        "other": "Sie dürfen das Demo-Konto nicht bearbeiten."
     },
     "club": {
         "other": "Verein"
@@ -144,7 +147,7 @@
         "other": "Derzeit gibt es 0 Spieler in diesem Verein"
     },
     "currently_0_player_available": {
-        "other": "Derzeit stehen 0 Spieler zur Verfügung"
+        "other": "Derzeit ist 0 Spieler verfügbar"
     },
     "currently_0_team_available": {
         "other": "Derzeit ist 0 Team verfügbar"
@@ -198,7 +201,7 @@
         "other": "Bearbeitung ✉️ E-Mail"
     },
     "editing_password": {
-        "other": "Bearbeiten 🔒 Passwort"
+        "other": "Bearbeitung 🔒 Passwort"
     },
     "editing_username": {
         "other": "Bearbeitung 👤 Benutzername"
@@ -243,13 +246,13 @@
         "other": "Ranking muss eine Nummer sein"
     },
     "failed_to_load_profile": {
-        "other": "Ihr Profil nicht laden"
+        "other": "Ihr Profil konnte nicht geladen werden"
     },
     "failed_to_log_in": {
-        "other": "Nicht anmelden:"
+        "other": "Einloggen fehlgeschlagen"
     },
     "failed_to_sign_up": {
-        "other": "Es gibt keine Anmeldung: Benutzername oder E-Mail existiert bereits"
+        "other": "Anmeldung fehlgeschlagen: Benutzername oder E-Mail existiert bereits"
     },
     "firstname": {
         "other": "Vorname"
@@ -261,7 +264,7 @@
         "other": "Der Vorname darf nicht leer sein"
     },
     "forehand": {
-        "other": "Vorhand Belag"
+        "other": "Vorhandbelag"
     },
     "forgot_password": {
         "other": "Passwort vergessen?"
@@ -294,7 +297,7 @@
         "other": "spielt nicht mehr in"
     },
     "lastname": {
-        "other": "Lastname"
+        "other": "Nachname"
     },
     "lastname.must_be_valid": {
         "other": "Der Nachname muss gültig sein. Zum Beispiel Dupont, Müller"
@@ -303,7 +306,7 @@
         "other": "Der Nachname darf nicht leer sein"
     },
     "loading": {
-        "other": "Wird geladen"
+        "other": "Laden der Datenbank"
     },
     "log_in": {
         "other": "Einloggen"
@@ -312,7 +315,7 @@
         "other": "Ausloggen"
     },
     "login": {
-        "other": "Login"
+        "other": "Einloggen"
     },
     "main_menu": {
         "other": "Hauptmenü"
@@ -336,13 +339,13 @@
         "other": "Mein Profil"
     },
     "new_passwords_do_not_match": {
-        "other": "Neue Passwörter stimmen nicht überein"
+        "other": "Die neuen Passwörter stimmen nicht überein"
     },
     "no": {
         "other": "Nein"
     },
     "no_longer_plays_in_team": {
-        "other": "spielt nicht mehr in Teams (en)"
+        "other": "spielt nicht mehr in Team"
     },
     "not_indicated": {
         "other": "Nicht angegeben"
@@ -363,7 +366,7 @@
         "other": "Das Passwort muss gültig sein (nur Buchstaben und Zahlen sind zulässig, Räume sind nicht zulässig)"
     },
     "password.not_matching": {
-        "other": "Passwörter stimmen nicht überein"
+        "other": "Die Passwörter stimmen nicht überein"
     },
     "password_successfully_changed": {
         "other": "Passwort erfolgreich geändert"
@@ -393,7 +396,7 @@
         "other": "Bitte authentifizieren"
     },
     "quit": {
-        "other": "Aufhören"
+        "other": "Verlassen"
     },
     "ranking": {
         "other": "Rangliste (Punkte)"
@@ -462,7 +465,7 @@
         "other": "Speichern"
     },
     "save_before_quit": {
-        "other": "Sie haben nicht gerettete Änderungen. Möchten Sie sie speichern, bevor Sie aufhören?"
+        "other": "Sie haben nicht gerettete Änderungen. Möchten Sie sie speichern, bevor Sie verlassen?"
     },
     "save_changes": {
         "other": "Änderungen speichern"
@@ -471,13 +474,13 @@
         "other": "Wird gespeichert"
     },
     "select_a_club": {
-        "other": "Einen Verein auswählen"
+        "other": "Verein auswählen"
     },
     "select_a_player": {
-        "other": "Einen Spieler auswählen"
+        "other": "Spieler auswählen"
     },
     "select_a_team": {
-        "other": "Ein Team auswählen"
+        "other": "Team auswählen"
     },
     "show_clubs": {
         "other": "Vereine zeigen"
@@ -516,7 +519,7 @@
         "other": "Der Teamname muss nur Buchstaben oder Zahlen sein"
     },
     "team_name.must_not_be_empty": {
-        "other": "Teamname darf nicht leer sein"
+        "other": "Der Teamname darf nicht leer sein"
     },
     "team_now_has_player": {
         "other": "Team %v hat jetzt Spieler (s) %v"
@@ -627,7 +630,7 @@
         "other": "Ihre Informationen* (in Ausgabe)"
     },
     "your_players": {
-        "other": "Deine Spieler"
+        "other": "Ihre Spieler"
     },
     "your_teams": {
         "other": "Ihre Teams"
