@@ -71,6 +71,9 @@
     "changes_saved": {
         "other": "Modifications enregistrées"
     },
+    "cant_change_demo_account": {
+        "other": "Vous ne pouvez pas éditer le compte démo"
+    },
     "club": {
         "other": "Club"
     },
@@ -246,7 +249,7 @@
         "other": "Impossible de charger votre profil"
     },
     "failed_to_log_in": {
-        "other": "Échec de la connexion:"
+        "other": "Échec de la connexion"
     },
     "failed_to_sign_up": {
         "other": "Échec de l'inscription: le nom d'utilisateur ou le courrier électronique existe déjà"
@@ -303,7 +306,7 @@
         "other": "Le nom de famille ne doit pas être vide"
     },
     "loading": {
-        "other": "Chargement"
+        "other": "Chargement de la base de données"
     },
     "log_in": {
         "other": "Se connecter"
@@ -342,7 +345,7 @@
         "other": "Non"
     },
     "no_longer_plays_in_team": {
-        "other": "Ne joue plus en équipe (s)"
+        "other": "Ne joue plus en équipe"
     },
     "not_indicated": {
         "other": "Non renseigné"
@@ -462,7 +465,7 @@
         "other": "Sauvegarder"
     },
     "save_before_quit": {
-        "other": "Vous avez des changements non sauvés. Voulez-vous les sauver avant d'arrêter?"
+        "other": "Vous avez des changements non sauvés. Voulez-vous les sauver avant de quitter?"
     },
     "save_changes": {
         "other": "Enregistrer les modifications"

@@ -131,7 +131,6 @@ func UserPage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.App) {
 
 // ChangeUsernamePage sets up the page to change user's username.
 func ChangeUsernamePage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.App) {
-
 	pageTitle := setTitle(T("editing_username"), 32)
 
 	usernameLabel := widget.NewLabel(T("current_username") + user.Name)
@@ -139,6 +138,9 @@ func ChangeUsernamePage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.Ap
 	editUsernameEntry.SetPlaceHolder(T("enter_new_username"))
 
 	confirmButton := widget.NewButton(T("confirm"), func() {
+		if protectDemoAccount(user, db, w, a) {
+			return
+		}
 		err := mf.ChangeUsername(user.Name, editUsernameEntry.Text, db)
 		if err != nil {
 			dialog.ShowError(err, w)
@@ -176,6 +178,9 @@ func ChangeEmailPage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.App) 
 	editEmailEntry.SetPlaceHolder(T("enter_new_email"))
 
 	confirmButton := widget.NewButton(T("confirm"), func() {
+		if protectDemoAccount(user, db, w, a) {
+			return
+		}
 		err := mf.ChangeEmail(editEmailEntry.Text, user)
 		if err != nil {
 			dialog.ShowError(err, w)
@@ -217,6 +222,9 @@ func ChangePasswordPage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.Ap
 	confirmEditPasswordLabel := widget.NewLabel(T("confirm_your_new_password"))
 
 	confirmButton := widget.NewButton(T("confirm"), func() {
+		if protectDemoAccount(user, db, w, a) {
+			return
+		}
 		err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(currentPasswordEntry.Text))
 		if err != nil {
 			// Password is wrong
@@ -261,4 +269,13 @@ func ChangePasswordPage(user *mt.User, db *mt.Database, w fyne.Window, a fyne.Ap
 	)
 	w.SetContent(content)
 
+}
+
+func protectDemoAccount(user *mt.User, db *mt.Database, w fyne.Window, a fyne.App) bool {
+	if user.Name == "demo" {
+		dialog.ShowInformation(T("success"), T("cant_change_demo_account"), w)
+		UserPage(user, db, w, a)
+		return true
+	}
+	return false
 }
