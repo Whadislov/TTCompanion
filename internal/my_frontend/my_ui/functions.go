@@ -92,7 +92,7 @@ func IsValidFirstname(name string) (bool, error) {
 
 	// Name can be composed (not mandatory with the ()), will start will a -
 	// * means that the group can be repeated
-	nameRegex := `^[a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+(-[a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+)*$`
+	nameRegex := `^[a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+([- ][a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+)*$`
 
 	// Compile the regex
 	re := regexp.MustCompile(nameRegex)
@@ -113,7 +113,7 @@ func IsValidLastname(name string) (bool, error) {
 
 	// Name can be composed (not mandatory with the ()), will start will a -
 	// * means that the group can be repeated
-	nameRegex := `^[a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+(-[a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+)*$`
+	nameRegex := `^[a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+([- ][a-zA-ZéèêçàÉÈÊÇÀßöäüÖÜÄ]+)*$`
 
 	// Compile the regex
 	re := regexp.MustCompile(nameRegex)
@@ -138,7 +138,7 @@ func isNumbersOnly(s string) bool {
 
 // isValidMaterialName verifies that the name follows some criterias
 func isValidMaterialName(s string) (bool, error) {
-	sRegex := `^[a-zA-Z0-9éèêçàÉÈÊÇÀßöäüÖÜÄ ]+([- ][a-zA-Z0-9éèêçàÉÈÊÇÀßöäüÖÜÄ ]+)*$`
+	sRegex := `^[a-zA-Z0-9éèêçàÉÈÊÇÀßöäüÖÜÄ,. ]+([-,. ][a-zA-Z0-9éèêçàÉÈÊÇÀßöäüÖÜÄ,. ]+)*$`
 
 	// Compile the regex
 	re := regexp.MustCompile(sRegex)
