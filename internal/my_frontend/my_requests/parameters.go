@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-var apiURL string = "https://ttcompanion.onrender.com/api/"
+var apiURL string = "http://localhost:3000/"
 
 func init() {
 	if url := os.Getenv("API_URL"); url != "" {
