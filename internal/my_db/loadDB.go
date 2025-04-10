@@ -179,6 +179,7 @@ func LoadDB() (*mt.Database, error) {
 		fmt.Println("Error loading postgresql database:", err)
 		return nil, err
 	}
+	defer db.Close()
 
 	log.Println("Loading user")
 	user, err := db.LoadUser()
@@ -224,7 +225,6 @@ func LoadDB() (*mt.Database, error) {
 		DeletedElements: map[string][]uuid.UUID{},
 	}
 	log.Println("Database loaded successfully")
-	defer db.Close()
 	return golangDB, nil
 }
 
@@ -253,11 +253,11 @@ func (db *Database) LoadAllUsers() (map[uuid.UUID]*mt.User, error) {
 // LoadUsers loads users from the database into the user map.
 func LoadUsersOnly() (*mt.Database, error) {
 	db, err := ConnectToDB()
-
 	if err != nil {
 		fmt.Println("Error loading postgresql database:", err)
 		return nil, err
 	}
+	defer db.Close()
 
 	users, err := db.LoadAllUsers()
 	if err != nil {
@@ -267,6 +267,5 @@ func LoadUsersOnly() (*mt.Database, error) {
 	golangDB := &mt.Database{
 		Users: users,
 	}
-	defer db.Close()
 	return golangDB, nil
 }

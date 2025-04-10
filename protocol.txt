@@ -6,7 +6,7 @@
     ctrl + c
 2. Compress the .wasm
     ```
-    node compress.js
+    node compress.js 1.2.3
     ```
 3. Cleanup
     Delete the .wasm and keep the .wasm.br
