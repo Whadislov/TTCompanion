@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-var apiURL string = "http://localhost:3000/"
+var apiURL string = "http://127.0.0.1:8080/api/"
 
 func init() {
 	if url := os.Getenv("API_URL"); url != "" {
