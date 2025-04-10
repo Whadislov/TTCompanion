@@ -27,16 +27,20 @@ func main() {
 	// App frontend
 	mux.Handle("/", http.FileServer(http.Dir("./wasm")))
 
-	log.Printf("Starting app server on %v:%v", serverAddress, serverPort)
-
 	go func() {
-		errServer := http.ListenAndServe(serverAddress+":"+serverPort, mux)
-		if errServer != nil {
-			log.Fatalf("App server error: %v", errServer)
+		log.Printf("Starting app server on %v:%v", serverAddress, serverPort)
+		err := http.ListenAndServe(serverAddress+":"+serverPort, mux)
+		if err != nil {
+			log.Fatalf("App server error: %v", err)
 		}
+
 	}()
+
 	// Verify that the API is ready
 	waitForAPI(serverPort, 10, 500*time.Millisecond)
+
+	// Loop to keep the program alive
+	select {}
 
 }
 
