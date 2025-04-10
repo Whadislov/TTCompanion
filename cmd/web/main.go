@@ -26,14 +26,15 @@ func main() {
 
 	log.Printf("Starting app server on %v:%v", serverAddress, serverPort)
 
+	errServer := http.ListenAndServe(serverAddress+":"+serverPort, mux)
+	if errServer != nil {
+		log.Fatalf("App server error: %v", errServer)
+	}
+
 	go func() {
-		errServer := http.ListenAndServe(serverAddress+":"+serverPort, mux)
-		if errServer != nil {
-			log.Fatalf("App server error: %v", errServer)
-		}
+		// Verify that the API is ready
+		waitForAPI(serverPort, 10, 500*time.Millisecond)
 	}()
-	// Verify that the API is ready
-	waitForAPI(serverPort, 10, 500*time.Millisecond)
 
 }
 
