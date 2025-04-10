@@ -9,15 +9,13 @@ import (
 	"time"
 
 	"github.com/Whadislov/TTCompanion/api"
-
-	_ "github.com/mattn/go-sqlite3" // Import the SQLite driver
 )
 
 func main() {
 
-	serverAddress, serverPort, err := loadConfig("config_app.json")
-	if err != nil {
-		log.Fatalf("Cannot read config file: %v", err)
+	serverAddress, serverPort, errConfig := loadConfig("config_app.json")
+	if errConfig != nil {
+		log.Fatalf("Cannot read config file: %v", errConfig)
 	}
 
 	// Create multiplexer to manage all routes
@@ -26,31 +24,16 @@ func main() {
 	// API
 	api.RegisterRoutes(mux)
 
-	// Define headers and serve the .wasm.br
-	mux.HandleFunc("/TTCompanion.wasm", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Encoding", "br")
-		w.Header().Set("Content-Type", "application/wasm")
-		http.ServeFile(w, r, "./wasm/TTCompanion.wasm.br")
-	})
-
-	// App frontend
-	mux.Handle("/", http.FileServer(http.Dir("./wasm")))
-
 	log.Printf("Starting app server on %v:%v", serverAddress, serverPort)
+
 	go func() {
-		err := http.ListenAndServe(serverAddress+":"+serverPort, mux)
-		if err != nil {
-			log.Fatalf("App server error: %v", err)
+		errServer := http.ListenAndServe(serverAddress+":"+serverPort, mux)
+		if errServer != nil {
+			log.Fatalf("App server error: %v", errServer)
 		}
-
 	}()
-
 	// Verify that the API is ready
 	waitForAPI(serverPort, 10, 500*time.Millisecond)
-
-	// Loop to keep the program alive
-	// replaced var wg sync.WaitGroup, wg.Wait()
-	select {}
 
 }
 

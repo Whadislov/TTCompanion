@@ -264,6 +264,7 @@ func SaveDB(golangDB *mt.Database) error {
 	if err != nil {
 		fmt.Println("Error while connecting to postgres database:", err)
 	}
+	defer sqlDB.Close()
 	sqlDB.ResetTables()
 	// Respect order, user then clubs, then team, then players
 	log.Println("Saving user")
@@ -307,6 +308,5 @@ func SaveDB(golangDB *mt.Database) error {
 		return err
 	}
 	log.Println("Database saved successfully.")
-	sqlDB.Close()
 	return nil
 }

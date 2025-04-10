@@ -22,6 +22,9 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mdb.SetPsqlInfo(os.Getenv("WEB_DB_LINK"))
 	mdb.SetDBName(os.Getenv("DB_NAME"))
 
+	// App frontend
+	mux.Handle("/", http.FileServer(http.Dir("./wasm")))
+
 	mux.Handle("/api/healthz", CorsMiddleware(http.HandlerFunc(IsApiReady)))
 	mux.Handle("/api/load-database", CorsMiddleware(authMiddleware(http.HandlerFunc(loadUserDatabaseHandler))))
 	mux.Handle("/api/save-database", CorsMiddleware(authMiddleware(http.HandlerFunc(saveDatabaseHandler))))
