@@ -8,12 +8,12 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// Database represents the SQLite database connection.
+// Database represents the postgres database connection.
 type Database struct {
 	Conn *sql.DB
 }
 
-// ConnectToDB initializes a connection to the SQLite database and creates it if it does not exist.
+// ConnectToDB initializes a connection to the postgres database and creates it if the database does not exist.
 func ConnectToDB() (*Database, error) {
 	var conn *sql.DB
 	var err error

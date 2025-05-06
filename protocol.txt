@@ -4,11 +4,8 @@
     fyne serve --port 8080 --sourceDir cmd/web/create_wasm/TTCompanion
     ```
     ctrl + c
-2. Compress the .wasm
+2. Compress the .wasm and auto clean up
     ```
     node compress.js 1.2.3
     ```
-3. Cleanup
-    Delete the .wasm and keep the .wasm.br
-    In wasm/index.html, change the application version : "application-version">v0.0.1<
-4. Push the develop or main branch to activate the corresponding pipeline
+3. Push the develop or main branch to activate the corresponding pipeline

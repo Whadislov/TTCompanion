@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// var apiURL string = "https://ttcompanion-prod-912172190800.europe-west9.run.app/api"
 var apiURL string = "https://ttcompanion.onrender.com/api/"
 
 func init() {
