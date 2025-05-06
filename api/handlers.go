@@ -8,7 +8,9 @@ import (
 	mdb "github.com/Whadislov/TTCompanion/internal/my_db"
 	mf "github.com/Whadislov/TTCompanion/internal/my_functions"
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
+
 	"github.com/google/uuid"
+	"github.com/gorilla/sessions"
 )
 
 // Handler for loading the database
@@ -99,6 +101,30 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Create a new session with gorilla
+	session, _ := cookieStore.Get(r, "session-name")
+	session.Values["authenticated"] = true
+	session.Values["jwt"] = credToken
+	session.Values["user_id"] = userID.String()
+	session.Options = &sessions.Options{
+		Path:     "/" + userID.String(),
+		MaxAge:   3600,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteStrictMode,
+	}
+
+	// Send JWT in a cookie
+	http.SetCookie(w, &http.Cookie{
+		Name:     "jwt_token",
+		Value:    credToken,
+		Path:     "/" + userID.String(),
+		MaxAge:   3600,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteStrictMode,
+	})
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"cred_token": credToken})
@@ -116,15 +142,6 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		sendJSONError(w, "Invalid request", "INVALID_REQUEST", http.StatusBadRequest)
 		return
 	}
-
-	/*
-		// Hash password
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(creds.Password), bcrypt.DefaultCost)
-		if err != nil {
-			http.Error(w, "Could not hash password", http.StatusInternalServerError)
-			return
-		}
-	*/
 
 	// Load the whole database to register the new user. Could be optimised to request directly postgres
 	db, err := mdb.LoadUsersOnly()
