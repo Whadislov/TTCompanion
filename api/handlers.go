@@ -109,8 +109,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	session.Options = &sessions.Options{
 		Path:     "/" + userID.String(),
 		MaxAge:   3600,
-		HttpOnly: true,
-		Secure:   true,
+		HttpOnly: false,
+		Secure:   false,
 		SameSite: http.SameSiteStrictMode,
 	}
 
@@ -120,8 +120,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		Value:    credToken,
 		Path:     "/" + userID.String(),
 		MaxAge:   3600,
-		HttpOnly: true,
-		Secure:   true,
+		HttpOnly: false,
+		Secure:   false,
 		SameSite: http.SameSiteStrictMode,
 	})
 
@@ -147,8 +147,8 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 		Value:    "",
 		Path:     "/",
 		MaxAge:   -1,
-		HttpOnly: true,
-		Secure:   true,
+		HttpOnly: false,
+		Secure:   false,
 		SameSite: http.SameSiteStrictMode,
 	})
 
