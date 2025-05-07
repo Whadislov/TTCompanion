@@ -13,9 +13,10 @@ type Config struct {
 
 var jwtSecret []byte
 
+// sign cookies with the secret key
+var cookieStore *sessions.CookieStore
+
 func SetJWTSecretKey(jwtSecretString string) {
 	jwtSecret = []byte(os.Getenv(jwtSecretString))
+	cookieStore = sessions.NewCookieStore(jwtSecret)
 }
-
-// sign cookies with the secret key
-var cookieStore = sessions.NewCookieStore(jwtSecret)
