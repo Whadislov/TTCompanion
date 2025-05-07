@@ -8,7 +8,9 @@ import (
 	mdb "github.com/Whadislov/TTCompanion/internal/my_db"
 	mf "github.com/Whadislov/TTCompanion/internal/my_functions"
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
+
 	"github.com/google/uuid"
+	"github.com/gorilla/sessions"
 )
 
 // Handler for loading the database
@@ -64,8 +66,8 @@ func saveDatabaseHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// Handler to check if the API is ready to take requests (not yet used)
-func IsApiReady(w http.ResponseWriter, r *http.Request) {
+// Handler to check if the API is ready to take requests
+func IsApiReadyHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -99,9 +101,60 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Create a new session with gorilla
+	session, _ := cookieStore.Get(r, "session-name")
+	session.Values["authenticated"] = true
+	session.Values["jwt"] = credToken
+	session.Values["user_id"] = userID.String()
+	session.Options = &sessions.Options{
+		Path:     "/" + userID.String(),
+		MaxAge:   3600,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteStrictMode,
+	}
+
+	// Send JWT in a cookie
+	http.SetCookie(w, &http.Cookie{
+		Name:     "jwt_token",
+		Value:    credToken,
+		Path:     "/" + userID.String(),
+		MaxAge:   3600,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteStrictMode,
+	})
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"cred_token": credToken})
+}
+
+// logoutHandler deletes the session and the cookie of a user when he logs out
+func LogoutHandler(w http.ResponseWriter, r *http.Request) {
+	// Delete the session
+	session, _ := cookieStore.Get(r, "session-name")
+	session.Values["authenticated"] = false
+	session.Options.MaxAge = -1 // Supprimer la session
+	if err := session.Save(r, w); err != nil {
+		sendJSONError(w, "Could not clear session", "INTERNAL_ERROR", http.StatusInternalServerError)
+		return
+	}
+
+	// Delete the JWT cookie
+	http.SetCookie(w, &http.Cookie{
+		Name:     "jwt_token",
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteStrictMode,
+	})
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"message": "Logged out successfully"})
 }
 
 // signUpHandler process the request to create a new user, returns a Credential token
@@ -116,15 +169,6 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		sendJSONError(w, "Invalid request", "INVALID_REQUEST", http.StatusBadRequest)
 		return
 	}
-
-	/*
-		// Hash password
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(creds.Password), bcrypt.DefaultCost)
-		if err != nil {
-			http.Error(w, "Could not hash password", http.StatusInternalServerError)
-			return
-		}
-	*/
 
 	// Load the whole database to register the new user. Could be optimised to request directly postgres
 	db, err := mdb.LoadUsersOnly()
@@ -165,4 +209,57 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"cred_token": credToken})
+}
+
+// checkPersistenceHandler process the request to verify if the current user has been connected within a certain duration (1h)
+func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Received request to check the persistence")
+	if r.Method != http.MethodGet {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	isAuth, userID, err := isAuthenticated(w, r)
+
+	if err != nil {
+		http.Error(w, "Invalid session", http.StatusMethodNotAllowed)
+	}
+
+	if isAuth {
+		// adding userID for next headers
+		r.Header.Set("User-ID", userID)
+
+		id, err := uuid.Parse(userID)
+		if err != nil {
+			http.Error(w, "Failed to parse user ID", http.StatusUnauthorized)
+			return
+		}
+
+		mdb.SetUserIDOfSession(id)
+		db, err := mdb.LoadDB()
+		if err != nil {
+			http.Error(w, "Failed to connect to database.", http.StatusInternalServerError)
+			return
+		}
+
+		response := map[string]any{
+			"authenticated": isAuth,
+			"database":      db,
+			"userID":        id,
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(response)
+		return
+	} else {
+		response := map[string]any{
+			"authenticated": isAuth,
+			"database":      nil,
+			"userID":        uuid.Invalid,
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(response)
+	}
 }

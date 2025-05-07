@@ -1,5 +1,5 @@
 # Step 1 : Build du backend
-FROM golang:1.22.2 AS builder
+FROM golang:1.23.8 AS builder
 WORKDIR /src
 
 COPY api api

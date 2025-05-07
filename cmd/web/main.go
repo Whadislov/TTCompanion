@@ -9,9 +9,20 @@ import (
 	"time"
 
 	"github.com/Whadislov/TTCompanion/api"
+	"github.com/joho/godotenv"
 )
 
+var jwtSecret []byte
+
 func main() {
+
+	// Set env variables
+	err := godotenv.Load("credentials.env")
+	if err != nil {
+		log.Fatal("Cannot load variables from .env")
+	}
+
+	setJWTSecretKey(os.Getenv("JWT_SECRET_KEY"))
 
 	serverAddress, serverPort, errConfig := loadConfig("config_app.json")
 	if errConfig != nil {
@@ -23,13 +34,6 @@ func main() {
 
 	// API
 	api.RegisterRoutes(mux)
-
-	// Define headers and serve the .wasm.br
-	mux.HandleFunc("/TTCompanion.wasm", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Encoding", "br")
-		w.Header().Set("Content-Type", "application/wasm")
-		http.ServeFile(w, r, "./wasm/TTCompanion.wasm.br")
-	})
 
 	// App frontend
 	mux.Handle("/", http.FileServer(http.Dir("./wasm")))
@@ -95,4 +99,8 @@ func cleanAddress(address string) string {
 		return address[7:]
 	}
 	return address
+}
+
+func setJWTSecretKey(jwtSecretString string) {
+	jwtSecret = []byte(os.Getenv(jwtSecretString))
 }

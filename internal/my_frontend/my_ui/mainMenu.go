@@ -88,6 +88,8 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 							loadingWindow(T("saving"), w, stopChan)
 						}()
 						err := mr.SaveDB(credToken, db)
+						// Delete cookie and session
+						mr.Logout(credToken)
 						stopChan <- "ok"
 						if err != nil {
 							dialog.ShowError(err, w)
@@ -110,6 +112,8 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 						w.SetMainMenu(nil)
 						w.SetContent(AuthentificationPage(w, a))
 					} else if appStartOption == "browser" {
+						// Delete cookie and session
+						mr.Logout(credToken)
 						// Reset the token, the flag, the menu and the database
 						credToken = ""
 						HasChanged = false
@@ -127,6 +131,8 @@ func MainMenu(db *mt.Database, w fyne.Window, a fyne.App) *fyne.MainMenu {
 				w.SetMainMenu(nil)
 				w.SetContent(AuthentificationPage(w, a))
 			} else if appStartOption == "browser" {
+				// Delete cookie and session
+				mr.Logout(credToken)
 				// Reset the menu, the token and the database
 				credToken = ""
 				w.SetMainMenu(nil)
