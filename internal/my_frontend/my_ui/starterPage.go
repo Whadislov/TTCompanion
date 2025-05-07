@@ -9,6 +9,7 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	mr "github.com/Whadislov/TTCompanion/internal/my_frontend/my_requests"
 )
 
 // StarterPage creates the introduction page to the UI and the starter page
@@ -33,6 +34,21 @@ func StarterPage() fyne.App {
 		loadTheme(a)
 	} else if appStartOption == "browser" {
 		loadThemeWeb(a)
+	}
+
+	// Check persistence
+	if appStartOption == "browser" {
+		hasPersistence, db, id, err := mr.CheckPersistence()
+		if err != nil {
+			log.Printf("Failed to check persistence: %v", err)
+		} else {
+			if hasPersistence {
+				userOfSession = db.Users[id]
+				MainPage(db, mainWindow, a)
+				mainWindow.SetMainMenu(MainMenu(db, mainWindow, a))
+				return a
+			}
+		}
 	}
 
 	// Starter page
