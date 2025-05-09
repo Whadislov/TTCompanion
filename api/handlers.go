@@ -101,8 +101,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create a new session with gorilla
-	session, _ := cookieStore.Get(r, "session-name")
+	// Create a new session with gorilla. Session name = persistency-session, the name needs to be static
+	session, _ := cookieStore.Get(r, "persistency-session")
 	session.Values["authenticated"] = true
 	session.Values["jwt"] = credToken
 	session.Values["user_id"] = userID.String()

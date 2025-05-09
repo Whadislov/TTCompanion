@@ -17,7 +17,7 @@ func CheckPersistence() (bool, *mt.Database, uuid.UUID, error) {
 	var isPersisOn bool
 	var id uuid.UUID
 
-	resp, err := http.Get("/check-persistence")
+	resp, err := http.Get(apiURL + "check-persistence")
 	if err != nil {
 		return false, nil, id, fmt.Errorf("Error fetching persistence: %w", err)
 	}
