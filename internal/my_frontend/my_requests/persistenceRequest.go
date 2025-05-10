@@ -11,32 +11,30 @@ import (
 )
 
 // checks if there is persistence
-// returns (bool, *mt.Database, int, error), if int == -1, it means there is no userID given
+// returns (bool, *mt.Database, int, error)
 func CheckPersistence() (bool, *mt.Database, uuid.UUID, error) {
-	var golangDB *mt.Database
-	var isPersisOn bool
-	var id uuid.UUID
-
 	resp, err := http.Get(apiURL + "check-persistence")
 	if err != nil {
-		return false, nil, id, fmt.Errorf("Error fetching persistence: %w", err)
+		return false, nil, uuid.UUID{}, fmt.Errorf("Error fetching persistence: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return false, nil, id, fmt.Errorf("server returned non-OK status: %d", resp.StatusCode)
+		return false, nil, uuid.UUID{}, fmt.Errorf("server returned non-OK status: %d", resp.StatusCode)
 	}
 
-	response := map[string]any{
-		"authenticated": isPersisOn,
-		"database":      golangDB,
-		"userID":        id,
+	type response struct {
+		Authenticated bool         `json:"authenticated"`
+		Database      *mt.Database `json:"database"`
+		UserID        uuid.UUID    `json:"userID"`
 	}
 
-	err = json.NewDecoder(resp.Body).Decode(&response)
+	var res response
+
+	err = json.NewDecoder(resp.Body).Decode(&res)
 	if err != nil {
-		return false, nil, id, fmt.Errorf("error decoding JSON: %w", err)
+		return false, nil, uuid.UUID{}, fmt.Errorf("error decoding JSON: %w", err)
 	}
-	return true, golangDB, id, nil
 
+	return res.Authenticated, res.Database, res.UserID, nil
 }

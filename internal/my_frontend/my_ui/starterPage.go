@@ -38,15 +38,16 @@ func StarterPage() fyne.App {
 
 	// Check persistence
 	if appStartOption == "browser" {
-		hasPersistence, db, id, err := mr.CheckPersistence()
+		//hasPersistence, db, id, err := mr.CheckPersistence()
+		hasPersistence, _, _, err := mr.CheckPersistence()
 		if err != nil {
 			log.Printf("Failed to check persistence: %v", err)
 		} else {
 			if hasPersistence {
-				userOfSession = db.Users[id]
-				MainPage(db, mainWindow, a)
-				mainWindow.SetMainMenu(MainMenu(db, mainWindow, a))
-				return a
+				//userOfSession = db.Users[id]
+				//MainPage(db, mainWindow, a)
+				//mainWindow.SetMainMenu(MainMenu(db, mainWindow, a))
+				//return a
 			}
 		}
 	}
