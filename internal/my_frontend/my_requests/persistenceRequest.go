@@ -26,7 +26,7 @@ func CheckPersistence() (bool, *mt.Database, uuid.UUID, error) {
 	type response struct {
 		Authenticated bool         `json:"authenticated"`
 		Database      *mt.Database `json:"database"`
-		UserID        uuid.UUID    `json:"userID"`
+		UserID        uuid.UUID    `json:"user_id"`
 	}
 
 	var res response

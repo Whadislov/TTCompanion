@@ -245,7 +245,7 @@ func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
 		response := map[string]any{
 			"authenticated": isAuth,
 			"database":      db,
-			"userID":        id,
+			"user_id":       id,
 		}
 
 		w.Header().Set("Content-Type", "application/json")
@@ -253,14 +253,14 @@ func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(response)
 		return
 	} else {
-		var db *mt.Database
 		response := map[string]any{
-			"authenticated": isAuth,
-			"database":      db,
-			"userID":        uuid.Invalid,
+			"authenticated": false,
+			"database":      nil,
+			"user_id":       uuid.Invalid,
 		}
 
 		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response)
 	}
 }
