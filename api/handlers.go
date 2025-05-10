@@ -253,9 +253,10 @@ func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(response)
 		return
 	} else {
+		var db *mt.Database
 		response := map[string]any{
 			"authenticated": isAuth,
-			"database":      nil,
+			"database":      db,
 			"userID":        uuid.Invalid,
 		}
 
