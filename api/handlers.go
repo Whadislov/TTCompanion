@@ -10,7 +10,6 @@ import (
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
 
 	"github.com/google/uuid"
-	"github.com/gorilla/sessions"
 )
 
 // Handler for loading the database
@@ -102,28 +101,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Create a new session with gorilla. Session name = persistency-session, the name needs to be static
-	session, _ := cookieStore.Get(r, "persistency-session")
-	session.Values["authenticated"] = true
-	session.Values["jwt"] = credToken
-	session.Values["user_id"] = userID.String()
-	session.Options = &sessions.Options{
-		Path:     "/" + userID.String(),
-		MaxAge:   3600,
-		HttpOnly: false,
-		Secure:   false,
-		SameSite: http.SameSiteStrictMode,
-	}
+	createSession(r, credToken, userID)
 
 	// Send JWT in a cookie
-	http.SetCookie(w, &http.Cookie{
-		Name:     "jwt_token",
-		Value:    credToken,
-		Path:     "/" + userID.String(),
-		MaxAge:   3600,
-		HttpOnly: false,
-		Secure:   false,
-		SameSite: http.SameSiteStrictMode,
-	})
+	createCookie(w, credToken)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -133,24 +114,13 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 // logoutHandler deletes the session and the cookie of a user when he logs out
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	// Delete the session
-	session, _ := cookieStore.Get(r, "session-name")
-	session.Values["authenticated"] = false
-	session.Options.MaxAge = -1 // Supprimer la session
-	if err := session.Save(r, w); err != nil {
-		sendJSONError(w, "Could not clear session", "INTERNAL_ERROR", http.StatusInternalServerError)
+	err := deleteSession(w, r)
+	if err != nil {
 		return
 	}
 
 	// Delete the JWT cookie
-	http.SetCookie(w, &http.Cookie{
-		Name:     "jwt_token",
-		Value:    "",
-		Path:     "/",
-		MaxAge:   -1,
-		HttpOnly: false,
-		Secure:   false,
-		SameSite: http.SameSiteStrictMode,
-	})
+	deleteCookie(w)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -205,6 +175,10 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		sendJSONError(w, "Could not generate credToken", "INTERNAL_ERROR", http.StatusInternalServerError)
 		return
 	}
+
+	createSession(r, credToken, newUser.ID)
+
+	createCookie(w, credToken)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

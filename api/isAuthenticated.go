@@ -10,7 +10,7 @@ import (
 // returns (isAuthenticated, userID, error).
 func isAuthenticated(w http.ResponseWriter, r *http.Request) (bool, string, error) {
 	// session verification, use same session name as in the login handler
-	session, err := cookieStore.Get(r, "persistency-session")
+	session, err := cookieStore.Get(r, "auth-session")
 	if err != nil {
 		return false, "", fmt.Errorf("invalid session: %w", err)
 	}
