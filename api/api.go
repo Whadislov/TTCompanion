@@ -25,9 +25,9 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.Handle("/api/healthz", CorsMiddleware(http.HandlerFunc(IsApiReadyHandler)))
 	mux.Handle("/api/load-database", CorsMiddleware(authMiddleware(http.HandlerFunc(loadUserDatabaseHandler))))
 	mux.Handle("/api/save-database", CorsMiddleware(authMiddleware(http.HandlerFunc(saveDatabaseHandler))))
-	mux.Handle("/api/login", CorsMiddleware(authMiddleware(http.HandlerFunc(LoginHandler))))
-	mux.Handle("/api/logout", CorsMiddleware(authMiddleware(http.HandlerFunc(LogoutHandler))))
-	mux.Handle("/api/signup", CorsMiddleware(authMiddleware(http.HandlerFunc(SignUpHandler))))
+	mux.Handle("/api/login", CorsMiddleware(http.HandlerFunc(LoginHandler)))
+	mux.Handle("/api/logout", CorsMiddleware(http.HandlerFunc(LogoutHandler)))
+	mux.Handle("/api/signup", CorsMiddleware(http.HandlerFunc(SignUpHandler)))
 	mux.HandleFunc("/api/check-persistence", checkPersistenceHandler)
 
 	mux.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {

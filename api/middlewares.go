@@ -28,14 +28,11 @@ func authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			http.Error(w, fmt.Sprintf("Authentication error: %v", err), http.StatusUnauthorized)
 			return
 		}
-
-		if !isAuth {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
-			return
+		if isAuth {
+			// adding userID for next headers
+			r.Header.Set("User-ID", userID)
 		}
 
-		// adding userID for next headers
-		r.Header.Set("User-ID", userID)
 		next(w, r)
 	}
 }
