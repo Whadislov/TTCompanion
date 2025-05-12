@@ -193,48 +193,45 @@ func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	isAuth, userID, err := isAuthenticated(w, r)
+	// get userID from the header
+	userID := r.Header.Get("User-ID")
 
-	if err != nil {
-		http.Error(w, "Invalid session", http.StatusMethodNotAllowed)
-	}
-
-	if isAuth {
-		// adding userID for next headers
-		r.Header.Set("User-ID", userID)
-
-		id, err := uuid.Parse(userID)
-		if err != nil {
-			http.Error(w, "Failed to parse user ID", http.StatusUnauthorized)
-			return
-		}
-
-		mdb.SetUserIDOfSession(id)
-		db, err := mdb.LoadDB()
-		if err != nil {
-			http.Error(w, "Failed to connect to database.", http.StatusInternalServerError)
-			return
-		}
-
-		response := map[string]any{
-			"authenticated": isAuth,
-			"database":      db,
-			"user_id":       id,
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response)
-		return
-	} else {
+	// persistence == false
+	if userID == "" {
 		response := map[string]any{
 			"authenticated": false,
 			"database":      nil,
-			"user_id":       uuid.Invalid,
+			"user_id":       uuid.UUID{},
 		}
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response)
 	}
+
+	// persistence == true
+	id, err := uuid.Parse(userID)
+	if err != nil {
+		http.Error(w, "Failed to parse user ID", http.StatusUnauthorized)
+		return
+	}
+
+	mdb.SetUserIDOfSession(id)
+	db, err := mdb.LoadDB()
+	if err != nil {
+		http.Error(w, "Failed to connect to database.", http.StatusInternalServerError)
+		return
+	}
+
+	response := map[string]any{
+		"authenticated": true,
+		"database":      db,
+		"user_id":       id,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(response)
+	return
+
 }

@@ -28,7 +28,7 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.Handle("/api/login", CorsMiddleware(http.HandlerFunc(LoginHandler)))
 	mux.Handle("/api/logout", CorsMiddleware(http.HandlerFunc(LogoutHandler)))
 	mux.Handle("/api/signup", CorsMiddleware(http.HandlerFunc(SignUpHandler)))
-	mux.HandleFunc("/api/check-persistence", checkPersistenceHandler)
+	mux.Handle("/api/check-persistence", CorsMiddleware(persisMiddleware(http.HandlerFunc(checkPersistenceHandler))))
 
 	mux.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Welcome to TT Companion's API")

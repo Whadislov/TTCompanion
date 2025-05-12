@@ -20,7 +20,18 @@ func CheckPersistence() (bool, *mt.Database, uuid.UUID, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return false, nil, uuid.UUID{}, fmt.Errorf("server returned non-OK status: %d", resp.StatusCode)
+		var errorResponse struct {
+			Error string `json:"error"`
+			Code  string `json:"code"`
+		}
+
+		if err := json.NewDecoder(resp.Body).Decode(&errorResponse); err != nil {
+			return false, nil, uuid.UUID{}, fmt.Errorf("error decoding server response: %w", err)
+		}
+
+		if errorResponse.Code == "PERSISTENCE_CHECK_ERROR" {
+			return false, nil, uuid.UUID{}, fmt.Errorf("server response for persistence check :%s", errorResponse.Error)
+		}
 	}
 
 	type response struct {
@@ -31,8 +42,8 @@ func CheckPersistence() (bool, *mt.Database, uuid.UUID, error) {
 
 	var res response
 
-	err = json.NewDecoder(resp.Body).Decode(&res)
-	if err != nil {
+	errDecode := json.NewDecoder(resp.Body).Decode(&res)
+	if errDecode != nil {
 		return false, nil, uuid.UUID{}, fmt.Errorf("error decoding JSON: %w", err)
 	}
 
