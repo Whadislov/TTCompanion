@@ -35,6 +35,13 @@ func main() {
 	// API
 	api.RegisterRoutes(mux)
 
+	// Define headers and serve the .wasm.br. MANDATORY
+	mux.HandleFunc("/TTCompanion.wasm", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Encoding", "br")
+		w.Header().Set("Content-Type", "application/wasm")
+		http.ServeFile(w, r, "./wasm/TTCompanion.wasm.br")
+	})
+
 	// App frontend
 	mux.Handle("/", http.FileServer(http.Dir("./wasm")))
 
