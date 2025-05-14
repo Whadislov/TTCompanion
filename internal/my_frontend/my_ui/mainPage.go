@@ -95,6 +95,8 @@ func MainPage(db *mt.Database, w fyne.Window, a fyne.App) {
 					loadingWindow(T("saving"), w, stopChan)
 				}()
 				err := mr.SaveDB(credToken, db)
+				// Delete cookie and session
+				mr.Logout(credToken)
 				stopChan <- "ok"
 				if err != nil {
 					dialog.ShowError(err, w)
@@ -117,6 +119,8 @@ func MainPage(db *mt.Database, w fyne.Window, a fyne.App) {
 				w.SetMainMenu(nil)
 				w.SetContent(AuthentificationPage(w, a))
 			} else if appStartOption == "browser" {
+				// Delete cookie and session
+				mr.Logout(credToken)
 				// Reset the menu, the token and the database
 				credToken = ""
 				w.SetMainMenu(nil)

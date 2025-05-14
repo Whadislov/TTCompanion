@@ -1,7 +1,7 @@
 package api
 
 import (
-	"os"
+	"github.com/gorilla/sessions"
 )
 
 type Config struct {
@@ -11,6 +11,10 @@ type Config struct {
 
 var jwtSecret []byte
 
+// sign cookies with the secret key
+var cookieStore *sessions.CookieStore
+
 func SetJWTSecretKey(jwtSecretString string) {
-	jwtSecret = []byte(os.Getenv(jwtSecretString))
+	jwtSecret = []byte(jwtSecretString)
+	cookieStore = sessions.NewCookieStore(jwtSecret)
 }

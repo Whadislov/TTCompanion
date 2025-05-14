@@ -22,11 +22,13 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mdb.SetPsqlInfo(os.Getenv("WEB_DB_LINK"))
 	mdb.SetDBName(os.Getenv("DB_NAME"))
 
-	mux.Handle("/api/healthz", CorsMiddleware(http.HandlerFunc(IsApiReady)))
+	mux.Handle("/api/healthz", CorsMiddleware(http.HandlerFunc(IsApiReadyHandler)))
 	mux.Handle("/api/load-database", CorsMiddleware(authMiddleware(http.HandlerFunc(loadUserDatabaseHandler))))
 	mux.Handle("/api/save-database", CorsMiddleware(authMiddleware(http.HandlerFunc(saveDatabaseHandler))))
 	mux.Handle("/api/login", CorsMiddleware(http.HandlerFunc(LoginHandler)))
+	mux.Handle("/api/logout", CorsMiddleware(http.HandlerFunc(LogoutHandler)))
 	mux.Handle("/api/signup", CorsMiddleware(http.HandlerFunc(SignUpHandler)))
+	mux.Handle("/api/check-persistence", persisMiddleware(http.HandlerFunc(checkPersistenceHandler)))
 
 	mux.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Welcome to TT Companion's API")

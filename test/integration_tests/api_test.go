@@ -17,7 +17,7 @@ func TestIsApiReady(t *testing.T) {
 	}
 
 	recorder := httptest.NewRecorder()
-	handler := http.HandlerFunc(api.IsApiReady)
+	handler := http.HandlerFunc(api.IsApiReadyHandler)
 	handler.ServeHTTP(recorder, req)
 
 	if status := recorder.Code; status != http.StatusOK {

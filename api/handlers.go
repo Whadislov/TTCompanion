@@ -8,12 +8,13 @@ import (
 	mdb "github.com/Whadislov/TTCompanion/internal/my_db"
 	mf "github.com/Whadislov/TTCompanion/internal/my_functions"
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
+
 	"github.com/google/uuid"
 )
 
 // Handler for loading the database
 func loadUserDatabaseHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Received request to load user DB")
+	log.Println("API : Received request to load user DB")
 	if r.Method != http.MethodGet {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -45,6 +46,7 @@ func loadUserDatabaseHandler(w http.ResponseWriter, r *http.Request) {
 
 // Handler for saving the local changes to the database
 func saveDatabaseHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("API : Received request to save user DB")
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -64,8 +66,8 @@ func saveDatabaseHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// Handler to check if the API is ready to take requests (not yet used)
-func IsApiReady(w http.ResponseWriter, r *http.Request) {
+// Handler to check if the API is ready to take requests
+func IsApiReadyHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -99,13 +101,31 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Create a new session with gorilla. Session name = persistency-session, the name needs to be static
+	log.Println("API : creation of a session")
+	createSession(w, r, credToken)
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"cred_token": credToken})
 }
 
+// logoutHandler deletes the session and the cookie of a user when he logs out
+func LogoutHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("API : Received request to log user out")
+	err := deleteSession(w, r)
+	if err != nil {
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"message": "Logged out successfully"})
+}
+
 // signUpHandler process the request to create a new user, returns a Credential token
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("API : Received request to sign user up")
 	var signUpData struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
@@ -116,15 +136,6 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		sendJSONError(w, "Invalid request", "INVALID_REQUEST", http.StatusBadRequest)
 		return
 	}
-
-	/*
-		// Hash password
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(creds.Password), bcrypt.DefaultCost)
-		if err != nil {
-			http.Error(w, "Could not hash password", http.StatusInternalServerError)
-			return
-		}
-	*/
 
 	// Load the whole database to register the new user. Could be optimised to request directly postgres
 	db, err := mdb.LoadUsersOnly()
@@ -162,7 +173,64 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println("API : creation of a session")
+	createSession(w, r, credToken)
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"cred_token": credToken})
+}
+
+// checkPersistenceHandler process the request to verify if the current user has been connected within a certain duration (1h)
+func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("API : Received request to check the persistence")
+	if r.Method != http.MethodGet {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// get userID from the header
+	userID := r.Header.Get("User-ID")
+
+	// persistence == false
+	if userID == "" {
+		log.Println("API : connexion is fresh")
+		response := map[string]any{
+			"authenticated": false,
+			"database":      nil,
+			"user_id":       uuid.UUID{},
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(response)
+	} else {
+		// persistence == true
+		id, err := uuid.Parse(userID)
+		log.Println("API : persistence is available")
+		if err != nil {
+			log.Println("API : Failed to parse user ID")
+			sendJSONError(w, "Failed to parse user ID", "PARSE_USERID", http.StatusUnauthorized)
+			return
+		}
+
+		mdb.SetUserIDOfSession(id)
+		db, err := mdb.LoadDB()
+		if err != nil {
+			log.Println("API : Failed to connect to database")
+			sendJSONError(w, "Failed to connect to database", "DATABASE_CONNEXION", http.StatusInternalServerError)
+			return
+		}
+
+		response := map[string]any{
+			"authenticated": true,
+			"database":      db,
+			"user_id":       id,
+		}
+
+		log.Println("API : persistence is done")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(response)
+	}
 }
