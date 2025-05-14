@@ -3,6 +3,7 @@ package myfrontend
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
@@ -47,5 +48,9 @@ func CheckPersistence() (bool, *mt.Database, uuid.UUID, error) {
 		return false, nil, uuid.UUID{}, fmt.Errorf("error decoding JSON: %w", err)
 	}
 
+	log.Println(fmt.Sprintf(`Finished checking for persistence. Results  :
+	Authenticated : %v
+	Database == nil : %v
+	UserID == uuid.UUID{} : %v`, res.Authenticated, res.Database == nil, res.UserID == uuid.UUID{}))
 	return res.Authenticated, res.Database, res.UserID, nil
 }

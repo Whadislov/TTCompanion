@@ -9,3 +9,10 @@
     node compress.js 1.2.3
     ```
 3. Push the develop or main branch to activate the corresponding pipeline
+
+## Local testing 
+1. Change server port in config_app.json to 8000
+2. In parameters in my_requests, change apiURL to "http://localhost:8000/api/"
+3. Build wasm : fyne serve --port 8000 --sourceDir cmd/web/create_wasm/TTCompanion
+4. Stop the client : ctrl + c
+5. Launch server + client : go run cmd/web/main.go

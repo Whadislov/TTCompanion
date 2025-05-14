@@ -1,8 +1,6 @@
 package api
 
 import (
-	"os"
-
 	"github.com/gorilla/sessions"
 )
 
@@ -17,6 +15,6 @@ var jwtSecret []byte
 var cookieStore *sessions.CookieStore
 
 func SetJWTSecretKey(jwtSecretString string) {
-	jwtSecret = []byte(os.Getenv(jwtSecretString))
+	jwtSecret = []byte(jwtSecretString)
 	cookieStore = sessions.NewCookieStore(jwtSecret)
 }
