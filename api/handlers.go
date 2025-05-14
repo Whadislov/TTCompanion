@@ -14,7 +14,7 @@ import (
 
 // Handler for loading the database
 func loadUserDatabaseHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Received request to load user DB")
+	log.Println("API : Received request to load user DB")
 	if r.Method != http.MethodGet {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -46,6 +46,7 @@ func loadUserDatabaseHandler(w http.ResponseWriter, r *http.Request) {
 
 // Handler for saving the local changes to the database
 func saveDatabaseHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("API : Received request to save user DB")
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -101,10 +102,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Create a new session with gorilla. Session name = persistency-session, the name needs to be static
-	createSession(r, credToken, userID)
-
-	// Send JWT in a cookie
-	createCookie(w, credToken)
+	log.Println("API : creation of a session")
+	createSession(w, r, credToken)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -113,14 +112,11 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 // logoutHandler deletes the session and the cookie of a user when he logs out
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
-	// Delete the session
+	log.Println("API : Received request to log user out")
 	err := deleteSession(w, r)
 	if err != nil {
 		return
 	}
-
-	// Delete the JWT cookie
-	deleteCookie(w)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -129,6 +125,7 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 
 // signUpHandler process the request to create a new user, returns a Credential token
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("API : Received request to sign user up")
 	var signUpData struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
@@ -176,9 +173,8 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	createSession(r, credToken, newUser.ID)
-
-	createCookie(w, credToken)
+	log.Println("API : creation of a session")
+	createSession(w, r, credToken)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -187,7 +183,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 
 // checkPersistenceHandler process the request to verify if the current user has been connected within a certain duration (1h)
 func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Received request to check the persistence")
+	log.Println("API : Received request to check the persistence")
 	if r.Method != http.MethodGet {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -198,6 +194,7 @@ func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
 
 	// persistence == false
 	if userID == "" {
+		log.Println("API : connexion is fresh")
 		response := map[string]any{
 			"authenticated": false,
 			"database":      nil,
@@ -207,31 +204,33 @@ func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response)
+	} else {
+		// persistence == true
+		id, err := uuid.Parse(userID)
+		log.Println("API : persistence is available")
+		if err != nil {
+			log.Println("API : Failed to parse user ID")
+			sendJSONError(w, "Failed to parse user ID", "PARSE_USERID", http.StatusUnauthorized)
+			return
+		}
+
+		mdb.SetUserIDOfSession(id)
+		db, err := mdb.LoadDB()
+		if err != nil {
+			log.Println("API : Failed to connect to database")
+			sendJSONError(w, "Failed to connect to database", "DATABASE_CONNEXION", http.StatusInternalServerError)
+			return
+		}
+
+		response := map[string]any{
+			"authenticated": true,
+			"database":      db,
+			"user_id":       id,
+		}
+
+		log.Println("API : persistence is done")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(response)
 	}
-
-	// persistence == true
-	id, err := uuid.Parse(userID)
-	if err != nil {
-		http.Error(w, "Failed to parse user ID", http.StatusUnauthorized)
-		return
-	}
-
-	mdb.SetUserIDOfSession(id)
-	db, err := mdb.LoadDB()
-	if err != nil {
-		http.Error(w, "Failed to connect to database.", http.StatusInternalServerError)
-		return
-	}
-
-	response := map[string]any{
-		"authenticated": true,
-		"database":      db,
-		"user_id":       id,
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(response)
-	return
-
 }

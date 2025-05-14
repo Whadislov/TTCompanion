@@ -127,8 +127,9 @@ func verifyJWT(w http.ResponseWriter, r *http.Request, credTokenString string, s
 	session.Values["authenticated"] = true
 	session.Values["user_id"] = userID
 	session.Values["jwt"] = credTokenString
-	if err := session.Save(r, w); err != nil {
-		return "", fmt.Errorf("could not save session: %w", err)
+	errSave := session.Save(r, w)
+	if errSave != nil {
+		return "", fmt.Errorf("could not save session: %w", errSave)
 	}
 
 	return userID, nil

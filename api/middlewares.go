@@ -82,7 +82,10 @@ func authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 func persisMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		userID, err := getUserIDFromCookie(w, r)
-		if err != nil {
+		//no persistency
+		if err == fmt.Errorf("http: named cookie not present") {
+			return
+		} else if err != nil {
 			sendJSONError(w, fmt.Sprintf("Persistence check error: %v", err), "PERSISTENCE_CHECK_ERROR", http.StatusConflict)
 			return
 		}

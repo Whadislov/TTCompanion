@@ -13,23 +13,23 @@ import (
 )
 
 // StarterPage creates the introduction page to the UI and the starter page
-func StarterPage() fyne.App {
+func StarterPage() {
+	log.Printf("Client : launching app ")
 	a := app.NewWithID("com.onrender.TTCompanion")
-
-	icon, err := fyne.LoadResourceFromPath("Icon.png")
-	if err != nil {
-		log.Printf("Failed to load icon: %v", err)
-	}
-	a.SetIcon(icon)
 
 	// Set language
 	AddTranslationsFS(translations, "translation")
 
-	mainWindow := a.NewWindow("TT Companion")
-	mainWindow.Resize(fyne.NewSize(600, 400))
-	mainWindow.CenterOnScreen() // Center the window on the monitor
+	w := a.NewWindow("TT Companion")
+	w.Resize(fyne.NewSize(600, 400))
+	w.CenterOnScreen() // Center the window on the monitor
 
 	if appStartOption == "local" {
+		icon, err := fyne.LoadResourceFromPath("Icon.png")
+		if err != nil {
+			log.Printf("Failed to load icon: %v", err)
+		}
+		a.SetIcon(icon)
 		// Know if light mode is activated or not
 		loadTheme(a)
 	} else if appStartOption == "browser" {
@@ -38,21 +38,31 @@ func StarterPage() fyne.App {
 
 	// Check persistence
 	if appStartOption == "browser" {
+		log.Printf("Client : checking persistence ")
 		hasPersistence, db, id, err := mr.CheckPersistence()
 		//hasPersistence, _, _, err := mr.CheckPersistence()
 		if err != nil {
 			log.Printf("Failed to check persistence: %v", err)
 		} else {
 			if hasPersistence {
+				log.Printf("Client : persistence is on ")
 				userOfSession = db.Users[id]
-				MainPage(db, mainWindow, a)
-				mainWindow.SetMainMenu(MainMenu(db, mainWindow, a))
-				return a
+				// Change the theme here, because it is normally done on the auth page, which is bypassed by persistence
+				if a.Settings().ThemeVariant() == 1 {
+					lightTheme.IsActivated = true
+				} else {
+					darkTheme.IsActivated = true
+				}
+				MainPage(db, w, a)
+				w.SetMainMenu(MainMenu(db, w, a))
+				w.ShowAndRun()
+				return
 			}
 		}
 	}
 
 	// Starter page
+	log.Printf("Client : persistence is off ")
 	pageTitle := setTitle(T("welcome_to_tt_companion"), 32)
 	starterPage := container.NewCenter(pageTitle)
 
@@ -64,20 +74,20 @@ func StarterPage() fyne.App {
 			fadeText(pageTitle, themeColor)
 			// go to main page with delay so that the menu is not directly shown
 			log.Println("Transitioning to identification page")
-			mainWindow.SetContent(AuthentificationPage(mainWindow, a))
+			w.SetContent(AuthentificationPage(w, a))
 
 		} else if appStartOption == "browser" {
 			// No fade because it blinks on the browser and the problem is not yet solved
 			log.Println("Transitioning to the authentification page web")
-			mainWindow.SetContent(AuthentificationPageWeb(mainWindow, a))
+			w.SetContent(AuthentificationPageWeb(w, a))
 		}
 
 	}()
 	log.Println("Displaying welcome page")
-	mainWindow.SetContent(starterPage)
-	mainWindow.SetMainMenu(nil)
-	mainWindow.ShowAndRun()
-	return a
+	w.SetContent(starterPage)
+	w.SetMainMenu(nil)
+	w.ShowAndRun()
+	return
 }
 
 func fadeText(text *canvas.Text, textColor color.Color) {
