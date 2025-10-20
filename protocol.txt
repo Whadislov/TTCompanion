@@ -1,14 +1,16 @@
 ## Protocol to run the application on web
+0. Select the right address for the api in the frontend : internal/my_frontend/my_requests/parameters.go
+
 1. Create the .wasm
     ```
     fyne serve --port 8080 --sourceDir cmd/web/create_wasm/TTCompanion
     ```
-    ctrl + c
-2. Compress the .wasm and auto clean up
+    "ctrl + c" to stop the program
+2. Compress the generated .wasm into .wasm.br. Automatic clean up of the .wasm and ajusting of the version
     ```
     node compress.js 1.2.3
     ```
-3. Push the develop or main branch to activate the corresponding pipeline
+3. Push the develop or main branch to activate the corresponding pipeline (github Actions)
 
 ## Local testing 
 1. Change server port in config_app.json to 8000

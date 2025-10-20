@@ -11,6 +11,7 @@ import (
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
 )
 
+// Exit the application
 func Quit(db *mt.Database, w fyne.Window, a fyne.App, HasChanged bool) {
 
 	// Check for unsaved changes before quitting

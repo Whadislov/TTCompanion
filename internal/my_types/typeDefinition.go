@@ -37,7 +37,6 @@ type Team struct {
 	PlayerIDs map[uuid.UUID]string `json:"players"`
 	ClubID    map[uuid.UUID]string `json:"clubs"`
 	IsNew     bool                 `json:"is_new"`
-	//IsDeleted bool                 `json:"is_deleted"`
 }
 
 type Database struct {
@@ -45,5 +44,5 @@ type Database struct {
 	Clubs           map[uuid.UUID]*Club    `json:"clubs"`
 	Teams           map[uuid.UUID]*Team    `json:"teams"`
 	Players         map[uuid.UUID]*Player  `json:"players"`
-	DeletedElements map[string][]uuid.UUID `json:"deleted_elements"`
+	DeletedElements map[string][]uuid.UUID `json:"deleted_elements"` // store elements that need to be deleted on the PostgreSQL database
 }

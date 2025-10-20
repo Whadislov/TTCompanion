@@ -2,6 +2,7 @@ import json
 import os
 print("Current working directory :", os.getcwd())
 
+# Sort the translations
 # Quick sort code 
 input_file = 'translation/en.json'
 output_file = 'translation/en.json'

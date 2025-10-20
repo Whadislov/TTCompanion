@@ -181,7 +181,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"cred_token": credToken})
 }
 
-// checkPersistenceHandler process the request to verify if the current user has been connected within a certain duration (1h)
+// CheckPersistenceHandler process the request to verify if the current user has been connected within a certain duration (1h)
 func checkPersistenceHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("API : Received request to check the persistence")
 	if r.Method != http.MethodGet {

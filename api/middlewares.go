@@ -9,7 +9,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-// middleware that allows only get and post requests
+// Middleware that allows only get and post requests
 func CorsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -78,11 +78,11 @@ func authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-// middleware that checks persistency (valid session and cookie) and adds a header "User-ID"
+// Middleware that checks persistency (valid session and cookie) and adds a header "User-ID"
 func persisMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		userID, err := getUserIDFromCookie(w, r)
-		//no persistency
+		// no persistency
 		if err == fmt.Errorf("http: named cookie not present") {
 			return
 		} else if err != nil {

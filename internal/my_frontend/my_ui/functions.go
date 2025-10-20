@@ -29,14 +29,14 @@ func strHelper(list []string) string {
 	return str
 }
 
+// This function takes as parameter a variable of type : mt.Player or mt.Team or mt.Club
+// It returns a struct that contains the keys and the name of player/team/club.
+// The slices are alphabeticaly sorted
+
 func sortMap[T ~map[uuid.UUID]V, V mt.Entity](m T) []struct {
 	Key   uuid.UUID
 	Value V
 } {
-	// This function takes as parameter a variable of type : mt.Player or mt.Team or mt.Club
-	// It returns a struct that contains the keys and the name of player/team/club.
-	// The slices are alphabeticaly sorted
-	// Tip: it does not return a map, because maps can't be sorted
 
 	// Get keys from the map
 	keys := make([]uuid.UUID, 0, len(m))

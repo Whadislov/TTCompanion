@@ -8,7 +8,7 @@ import (
 	mt "github.com/Whadislov/TTCompanion/internal/my_types"
 )
 
-// FunctionalityPage creates the functionality page
+// FunctionalityPage creates the functionality page containing the buttons of all available functionnalities
 func FunctionalityPage(db *mt.Database, w fyne.Window, a fyne.App) *fyne.Container {
 	pageTitle := setTitle(T("functionalities"), 32)
 

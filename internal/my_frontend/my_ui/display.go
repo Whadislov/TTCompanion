@@ -1,6 +1,6 @@
 package myapp
 
-// Display starts the UI
+// Display starts the frontend
 func Display(appSOption string) {
 	appStartOption = appSOption
 	StarterPage()

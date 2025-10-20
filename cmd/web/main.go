@@ -62,6 +62,7 @@ func main() {
 
 }
 
+// get the address
 func loadConfig(filename string) (string, string, error) {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -81,12 +82,12 @@ func loadConfig(filename string) (string, string, error) {
 		return "", "", err
 	}
 
-	// Remove http:// if present
 	config.ServerAddress = cleanAddress(config.ServerAddress)
 
 	return config.ServerAddress, config.ServerPort, nil
 }
 
+// sync
 func waitForAPI(apiPort string, retries int, delay time.Duration) {
 	apiURL := "http://127.0.0.1:" + apiPort + "/api/healthz"
 	for range retries {
@@ -101,6 +102,7 @@ func waitForAPI(apiPort string, retries int, delay time.Duration) {
 	log.Fatal("API did not start in time")
 }
 
+// Remove http:// if present
 func cleanAddress(address string) string {
 	if strings.HasPrefix(address, "http://") {
 		return address[7:]
@@ -108,6 +110,7 @@ func cleanAddress(address string) string {
 	return address
 }
 
+// set the JWT key from the .env file
 func setJWTSecretKey(jwtSecretString string) {
 	jwtSecret = []byte(os.Getenv(jwtSecretString))
 }
