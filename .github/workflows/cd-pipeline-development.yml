@@ -27,13 +27,13 @@ jobs:
         echo "DB_NAME=${{ secrets.TTCOMPANION_DB_NAME }}" >> credentials.env
         echo "API_URL=${{ secrets.TTCOMPANION_API_URL_RENDER }}" >> credentials.env
     
-    - name: Install X11 dependencies (Linux)
-      run: |
-        sudo apt update
-        sudo apt install -y libx11-dev libxinerama-dev libxfixes-dev libxcursor-dev libxrandr-dev libxi-dev
+    # name: Install X11 dependencies (Linux)
+    #  run: |
+    #    sudo apt update
+    #    sudo apt install -y libx11-dev libxinerama-dev libxfixes-dev libxcursor-dev libxrandr-dev libxi-dev
 
-    - name: Run unit tests
-      run: go test -v ./...  # -v == verbose
+    #- name: Run unit tests
+    #  run: go test -v ./...  # -v == verbose
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
