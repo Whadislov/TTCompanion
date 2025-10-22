@@ -26,6 +26,11 @@ jobs:
         echo "JWT_SECRET_KEY=${{ secrets.TTCOMPANION_JWT_SECRET_KEY }}" >> credentials.env
         echo "DB_NAME=${{ secrets.TTCOMPANION_DB_NAME }}" >> credentials.env
         echo "API_URL=${{ secrets.TTCOMPANION_API_URL_RENDER }}" >> credentials.env
+    
+    - name: Install X11 dependencies (Linux)
+      run: |
+        sudo apt update
+        sudo apt install -y libx11-dev libxinerama-dev libxfixes-dev libxcursor-dev libxrandr-dev libxi-dev
 
     - name: Run unit tests
       run: go test -v ./...  # -v == verbose
