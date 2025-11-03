@@ -30,7 +30,7 @@ jobs:
     # name: Install X11 dependencies (Linux)
     #  run: |
     #    sudo apt update
-    #    sudo apt install -y libx11-dev libxinerama-dev libxfixes-dev libxcursor-dev libxrandr-dev libxi-dev
+    #    sudo apt install -y libx11-dev libxinerama-dev libxfixes-dev libxcursor-dev libxrandr-dev libxi-dev libgl1-mesa-dev
 
     #- name: Run unit tests
     #  run: go test -v ./...  # -v == verbose
