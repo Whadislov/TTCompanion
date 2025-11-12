@@ -1,0 +1,35 @@
+# === DEPLOYMENT ===
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ttcompanion
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ttcompanion
+  template:
+    metadata:
+      labels:
+        app: ttcompanion
+    spec:
+      containers:
+        - name: app
+          image: ttcompanion:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+
+---
+# === SERVICE (LoadBalancer) ===
+apiVersion: v1
+kind: Service
+metadata:
+  name: ttcompanion-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: ttcompanion
+  ports:
+    - port: 8081          
+      targetPort: 8080        
